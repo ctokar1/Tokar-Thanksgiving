@@ -1,0 +1,6 @@
+{
+  "name": "Thanksgiving at the Tokar's",
+  "description": "A formal yet playful family Thanksgiving dinner invitation at the Tokar's House in Cleveland Heights, featuring the potluck feast menu, gratitude wall, hidden autumn secrets, and The Great Tokar Turkey Challenge mini-game.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

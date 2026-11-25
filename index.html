@@ -1,0 +1,3779 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thanksgiving at the Tokar’s — Saturday, November 28th</title>
+    <meta
+      name="description"
+      content="You are cordially invited to Thanksgiving at the Tokar’s House in Cleveland Heights, OH. Feast menu, gratitude wall, and The Great Tokar Turkey Challenge."
+    />
+    <meta property="og:title" content="You Are Cordially Invited to Thanksgiving at the Tokar’s" />
+    <meta
+      property="og:description"
+      content="Saturday, November 28th at 3:00 PM · 3840 Kirkwood Road, Cleveland Heights, OH. Come early for football, mingling, and a homemade feast."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Editorial Serif & Warm Modern Sans-Serif Pairing -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ==========================================================================
+         1. DESIGN TOKENS & PALETTE
+         Theme: Rustic Elegance meets Cozy Autumn Playfulness
+         ========================================================================== */
+      :root {
+        --bg-parchment: #faf6f0;
+        --bg-linen: #f3ece1;
+        --bg-card: #fffdf9;
+        --bg-card-hover: #fffaf2;
+
+        --burgundy: #6b1d2f;
+        --burgundy-dark: #4f1321;
+        --burgundy-soft: rgba(107, 29, 47, 0.08);
+        --terracotta: #c85a17;
+        --terracotta-soft: rgba(200, 90, 23, 0.1);
+        --sage: #4a5d4e;
+        --sage-soft: rgba(74, 93, 78, 0.1);
+        --gold: #c59b27;
+        --gold-bright: #e2be53;
+        --gold-soft: rgba(197, 155, 39, 0.18);
+
+        --ink-primary: #271c19;
+        --ink-secondary: #5c4943;
+        --ink-muted: #7b665f;
+        --border-hairline: rgba(107, 29, 47, 0.14);
+        --border-gold: rgba(197, 155, 39, 0.42);
+
+        --font-display: 'Playfair Display', Georgia, serif;
+        --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-mono: 'JetBrains Mono', monospace;
+
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
+        --shadow-card: 0 4px 20px rgba(39, 28, 25, 0.045);
+        --shadow-elevated: 0 18px 48px rgba(39, 28, 25, 0.16);
+        --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      /* ==========================================================================
+         2. BASE & RESET
+         ========================================================================== */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        background-color: var(--bg-parchment);
+        color: var(--ink-primary);
+        font-family: var(--font-body);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        width: 100%;
+        max-width: 100%;
+        background-color: var(--bg-parchment);
+        background-image:
+          radial-gradient(circle at 12% 8%, rgba(200, 90, 23, 0.05) 0%, transparent 42%),
+          radial-gradient(circle at 88% 22%, rgba(197, 155, 39, 0.06) 0%, transparent 38%),
+          radial-gradient(circle at 50% 85%, rgba(107, 29, 47, 0.04) 0%, transparent 45%);
+        line-height: 1.65;
+        overflow-x: hidden;
+      }
+
+      img,
+      svg {
+        display: block;
+      }
+
+      button,
+      input,
+      textarea {
+        font-family: inherit;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--terracotta);
+        outline-offset: 3px;
+      }
+
+      /* ==========================================================================
+         3. AMBIENT & CELEBRATION CANVASES
+         ========================================================================== */
+      #ambient-leaves-canvas,
+      #celebration-canvas {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      #ambient-leaves-canvas {
+        z-index: 0;
+        opacity: 0.72;
+      }
+
+      #celebration-canvas {
+        z-index: 90;
+      }
+
+      /* ==========================================================================
+         4. TOP NAVIGATION BAR (Strict 3-Zone Editorial Header)
+         ========================================================================== */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        background: rgba(250, 246, 240, 0.9);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-hairline);
+      }
+
+      .header-inner {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0.85rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+      }
+
+      .brand-wordmark {
+        font-family: var(--font-display);
+        font-size: 1.18rem;
+        font-weight: 700;
+        color: var(--burgundy);
+        text-decoration: none;
+        letter-spacing: -0.01em;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1.75rem;
+      }
+
+      .nav-links a {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--ink-secondary);
+        text-decoration: none;
+        white-space: nowrap;
+        flex-shrink: 0;
+        position: relative;
+        padding: 0.25rem 0;
+        transition: color 180ms var(--ease-out-expo);
+      }
+
+      .nav-links a::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 1.5px;
+        background: var(--gold);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 200ms var(--ease-out-expo);
+      }
+
+      .nav-links a:hover {
+        color: var(--burgundy);
+      }
+
+      .nav-links a:hover::after {
+        transform: scaleX(1);
+      }
+
+      .header-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.55rem 1.15rem;
+        min-height: 40px;
+        border-radius: var(--radius-sm);
+        background: var(--burgundy);
+        color: #fffaf2;
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-decoration: none;
+        border: 1px solid var(--burgundy);
+        cursor: pointer;
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition:
+          background-color 180ms var(--ease-out-expo),
+          transform 180ms var(--ease-out-expo);
+      }
+
+      .header-cta:hover {
+        background: var(--burgundy-dark);
+        transform: translateY(-1px);
+      }
+
+      /* ==========================================================================
+         5. LAYOUT & SCROLL REVEAL
+         ========================================================================== */
+      main {
+        position: relative;
+        z-index: 10;
+      }
+
+      .container {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      .section {
+        padding: 4.5rem 0;
+      }
+
+      .section + .section {
+        border-top: 1px solid var(--border-hairline);
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: translateY(0);
+        transition:
+          opacity 600ms var(--ease-out-expo),
+          transform 600ms var(--ease-out-expo);
+      }
+
+      .reveal.reveal-pending {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      .reveal.reveal-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Gold Shimmer Border Effect */
+      @keyframes goldShimmer {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .gold-frame {
+        position: relative;
+        background: var(--bg-card);
+        border: 1px solid var(--border-gold);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-card);
+      }
+
+      .gold-frame::before {
+        content: '';
+        position: absolute;
+        inset: -1px;
+        border-radius: calc(var(--radius-lg) + 1px);
+        padding: 1px;
+        background: linear-gradient(
+          115deg,
+          rgba(197, 155, 39, 0.25) 0%,
+          rgba(226, 190, 83, 0.85) 35%,
+          rgba(107, 29, 47, 0.25) 65%,
+          rgba(197, 155, 39, 0.55) 100%
+        );
+        background-size: 220% 220%;
+        animation: goldShimmer 7s ease infinite;
+        -webkit-mask:
+          linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+      }
+
+      /* ==========================================================================
+         6. HERO / FORMAL INVITATION
+         ========================================================================== */
+      .hero-section {
+        padding: 3.5rem 0 4.5rem;
+      }
+
+      .invitation-card {
+        padding: 3.5rem 3.25rem;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .crest-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1.25rem;
+      }
+
+      .hero-kicker {
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--terracotta);
+        margin: 0 0 0.85rem;
+      }
+
+      .hero-title {
+        font-family: var(--font-display);
+        font-size: clamp(2.15rem, 4.4vw, 3.65rem);
+        font-weight: 700;
+        line-height: 1.13;
+        color: var(--burgundy);
+        margin: 0 auto 1.25rem;
+        max-width: 19ch;
+        text-wrap: balance;
+      }
+
+      .hero-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin: 1.5rem auto 2rem;
+        max-width: 340px;
+      }
+
+      .hero-divider-line {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      }
+
+      .hero-prose {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        color: var(--ink-secondary);
+        max-width: 66ch;
+        margin: 0 auto 2.75rem;
+        text-align: left;
+      }
+
+      .hero-prose::first-letter {
+        font-family: var(--font-display);
+        font-size: 3.35rem;
+        font-weight: 700;
+        line-height: 0.85;
+        float: left;
+        margin: 0.15rem 0.65rem 0 0;
+        color: var(--burgundy);
+      }
+
+      /* Logistics Grid inside Invitation */
+      .logistics-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.5rem;
+        text-align: left;
+        padding-top: 2rem;
+        border-top: 1px solid var(--border-hairline);
+      }
+
+      .logistics-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        padding: 0.5rem 0.75rem;
+      }
+
+      .logistics-item + .logistics-item {
+        border-left: 1px solid var(--border-hairline);
+        padding-left: 1.5rem;
+      }
+
+      .logistics-label {
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--sage);
+      }
+
+      .logistics-value {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--ink-primary);
+        line-height: 1.35;
+      }
+
+      .logistics-note {
+        font-size: 0.92rem;
+        color: var(--ink-secondary);
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        flex-wrap: wrap;
+      }
+
+      .location-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        margin-top: 0.65rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.45rem;
+        min-height: 40px;
+        padding: 0.5rem 1rem;
+        border-radius: var(--radius-sm);
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        white-space: nowrap;
+        transition:
+          background-color 180ms var(--ease-out-expo),
+          border-color 180ms var(--ease-out-expo),
+          transform 180ms var(--ease-out-expo),
+          color 180ms var(--ease-out-expo);
+      }
+
+      .btn-primary {
+        background: var(--burgundy);
+        color: #fffaf2;
+        border: 1px solid var(--burgundy);
+      }
+
+      .btn-primary:hover {
+        background: var(--burgundy-dark);
+        transform: translateY(-1px);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--burgundy);
+        border: 1px solid rgba(107, 29, 47, 0.3);
+      }
+
+      .btn-outline:hover {
+        background: var(--burgundy-soft);
+        border-color: var(--burgundy);
+        transform: translateY(-1px);
+      }
+
+      .btn-gold {
+        background: linear-gradient(135deg, #c59b27, #b08519);
+        color: #1f140d;
+        border: 1px solid #a67d14;
+      }
+
+      .btn-gold:hover {
+        filter: brightness(1.06);
+        transform: translateY(-1px);
+      }
+
+      /* Easter Egg #2: Interactive Football Button */
+      .egg-football-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        padding: 3px;
+        border-radius: 50%;
+        border: 1px solid transparent;
+        background: transparent;
+        cursor: pointer;
+        transition:
+          transform 200ms var(--ease-out-expo),
+          background-color 200ms var(--ease-out-expo),
+          border-color 200ms var(--ease-out-expo);
+        vertical-align: middle;
+      }
+
+      .egg-football-btn:hover {
+        transform: scale(1.16) rotate(-12deg);
+        background: var(--terracotta-soft);
+        border-color: rgba(200, 90, 23, 0.35);
+      }
+
+      /* ==========================================================================
+         7. SECTION HEADERS
+         ========================================================================== */
+      .section-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .section-kicker {
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--terracotta);
+        margin: 0 0 0.5rem;
+      }
+
+      .section-title {
+        font-family: var(--font-display);
+        font-size: clamp(1.85rem, 3.2vw, 2.6rem);
+        font-weight: 700;
+        color: var(--burgundy);
+        margin: 0 0 0.75rem;
+        text-wrap: balance;
+      }
+
+      .section-subtitle {
+        font-size: 1rem;
+        color: var(--ink-secondary);
+        max-width: 58ch;
+        margin: 0;
+      }
+
+      /* ==========================================================================
+         8. THE THANKSGIVING FEAST (POTLUCK MENU)
+         ========================================================================== */
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: 1.5rem;
+      }
+
+      .menu-card {
+        grid-column: span 4;
+        position: relative;
+        background: var(--bg-card);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-md);
+        padding: 1.75rem;
+        box-shadow: var(--shadow-card);
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        transition:
+          transform 220ms var(--ease-out-expo),
+          border-color 220ms var(--ease-out-expo),
+          background-color 220ms var(--ease-out-expo);
+      }
+
+      .menu-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--border-gold);
+        background: var(--bg-card-hover);
+      }
+
+      /* Feature host card spans 6 columns on desktop for balanced 2 + 3 layout */
+      .menu-card--featured {
+        grid-column: span 6;
+      }
+
+      .menu-card--wide {
+        grid-column: span 6;
+      }
+
+      .menu-card-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .menu-icon-wrap {
+        width: 64px;
+        height: 64px;
+        border-radius: var(--radius-sm);
+        background: var(--bg-linen);
+        border: 1px solid rgba(197, 155, 39, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .menu-host {
+        font-family: var(--font-display);
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--burgundy);
+        margin: 0 0 0.25rem;
+        line-height: 1.25;
+      }
+
+      .menu-role {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--sage);
+        letter-spacing: 0.03em;
+      }
+
+      .menu-dishes {
+        list-style: none;
+        padding: 0.85rem 0 0;
+        margin: 0;
+        border-top: 1px solid var(--border-hairline);
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .menu-dishes li {
+        font-size: 0.98rem;
+        color: var(--ink-primary);
+        display: flex;
+        align-items: baseline;
+        gap: 0.55rem;
+      }
+
+      .dish-bullet {
+        color: var(--terracotta);
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+
+      .special-request {
+        font-style: italic;
+        color: var(--burgundy);
+        font-weight: 600;
+      }
+
+      /* Easter Egg #3: Hidden Glowing Chef's Hat / Turkey Trigger */
+      .secret-chef-trigger {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.35rem 0.65rem;
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(197, 155, 39, 0.45);
+        background: rgba(197, 155, 39, 0.1);
+        color: #7d5c0d;
+        font-size: 0.78rem;
+        font-weight: 600;
+        cursor: pointer;
+        align-self: flex-start;
+        transition:
+          transform 200ms var(--ease-out-expo),
+          background-color 200ms var(--ease-out-expo),
+          box-shadow 200ms var(--ease-out-expo);
+      }
+
+      .secret-chef-trigger:hover {
+        transform: translateY(-1px) scale(1.03);
+        background: rgba(197, 155, 39, 0.22);
+        box-shadow: 0 0 16px rgba(197, 155, 39, 0.32);
+      }
+
+      /* Additional Feast Notes Box */
+      .feast-notes-box {
+        margin-top: 2rem;
+        padding: 2rem 2.25rem;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 1.75rem;
+        align-items: center;
+      }
+
+      .feast-notes-icon {
+        width: 72px;
+        height: 72px;
+        border-radius: var(--radius-md);
+        background: var(--bg-linen);
+        border: 1px solid var(--border-gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .feast-notes-content h3 {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--burgundy);
+        margin: 0 0 0.5rem;
+      }
+
+      .feast-notes-content p {
+        margin: 0;
+        color: var(--ink-secondary);
+        font-size: 0.98rem;
+        line-height: 1.65;
+      }
+
+      .feast-notes-content p + p {
+        margin-top: 0.55rem;
+        color: var(--ink-primary);
+        font-weight: 500;
+      }
+
+      /* ==========================================================================
+         9. INTERACTIVE GRATITUDE WALL
+         ========================================================================== */
+      .gratitude-layout {
+        display: grid;
+        grid-template-columns: minmax(290px, 380px) 1fr;
+        gap: 2.25rem;
+        align-items: start;
+      }
+
+      .gratitude-form-card {
+        padding: 1.85rem;
+        background: var(--bg-card);
+        border: 1px solid var(--border-hairline);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-card);
+      }
+
+      .gratitude-form-card h3 {
+        font-family: var(--font-display);
+        font-size: 1.35rem;
+        color: var(--burgundy);
+        margin: 0 0 0.45rem;
+      }
+
+      .gratitude-form-card p {
+        font-size: 0.92rem;
+        color: var(--ink-secondary);
+        margin: 0 0 1.35rem;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        margin-bottom: 1.1rem;
+      }
+
+      .form-group label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--ink-primary);
+      }
+
+      .form-input,
+      .form-textarea {
+        width: 100%;
+        padding: 0.7rem 0.9rem;
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(107, 29, 47, 0.22);
+        background: #ffffff;
+        color: var(--ink-primary);
+        font-size: 0.95rem;
+        transition:
+          border-color 180ms var(--ease-out-expo),
+          box-shadow 180ms var(--ease-out-expo);
+      }
+
+      .form-input:focus,
+      .form-textarea:focus {
+        outline: none;
+        border-color: var(--terracotta);
+        box-shadow: 0 0 0 3px rgba(200, 90, 23, 0.14);
+      }
+
+      .form-textarea {
+        min-height: 112px;
+        resize: vertical;
+      }
+
+      .form-error {
+        font-size: 0.84rem;
+        color: #9b1c1c;
+        margin: -0.4rem 0 0.9rem;
+        min-height: 1.2em;
+      }
+
+      .gratitude-board-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.65rem;
+        border-bottom: 1px solid var(--border-hairline);
+      }
+
+      .gratitude-count {
+        font-size: 0.88rem;
+        color: var(--ink-muted);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .gratitude-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.25rem;
+      }
+
+      @keyframes cardPopIn {
+        from {
+          opacity: 0;
+          transform: translateY(14px) scale(0.97);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .keepsake-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-gold);
+        border-radius: var(--radius-md);
+        padding: 1.45rem 1.5rem;
+        box-shadow: var(--shadow-card);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1rem;
+        position: relative;
+      }
+
+      .keepsake-card.is-new {
+        animation: cardPopIn 420ms var(--ease-out-expo) both;
+      }
+
+      .keepsake-quote {
+        font-family: var(--font-display);
+        font-style: italic;
+        font-size: 1.06rem;
+        line-height: 1.6;
+        color: var(--ink-primary);
+        margin: 0;
+      }
+
+      .keepsake-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid var(--border-hairline);
+        font-size: 0.85rem;
+      }
+
+      .keepsake-author {
+        font-weight: 700;
+        color: var(--burgundy);
+      }
+
+      .keepsake-meta {
+        color: var(--ink-muted);
+        font-size: 0.8rem;
+      }
+
+      .keepsake-remove {
+        background: transparent;
+        border: none;
+        color: var(--ink-muted);
+        font-size: 0.8rem;
+        cursor: pointer;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+      }
+
+      .keepsake-remove:hover {
+        color: var(--burgundy);
+        background: var(--burgundy-soft);
+      }
+
+      /* ==========================================================================
+         10. FOOTER & HIDDEN ACORN SECRET
+         ========================================================================== */
+      .site-footer {
+        position: relative;
+        z-index: 10;
+        border-top: 1px solid var(--border-hairline);
+        background: var(--bg-linen);
+        padding: 2.5rem 1.5rem 3.5rem;
+      }
+
+      .footer-inner {
+        max-width: 1120px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.25rem;
+      }
+
+      .footer-copy {
+        font-size: 0.9rem;
+        color: var(--ink-secondary);
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        flex-wrap: wrap;
+      }
+
+      .footer-secrets-hint {
+        font-size: 0.85rem;
+        color: var(--ink-muted);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      /* Easter Egg #1: Tiny Hidden Acorn */
+      .egg-acorn-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: 1px solid transparent;
+        background: transparent;
+        cursor: pointer;
+        opacity: 0.72;
+        transition:
+          opacity 200ms,
+          transform 220ms var(--ease-out-expo),
+          background-color 200ms;
+      }
+
+      .egg-acorn-btn:hover {
+        opacity: 1;
+        transform: scale(1.2) rotate(14deg);
+        background: var(--gold-soft);
+      }
+
+      /* Subtle Corner "Chef's Secret" Button */
+      .corner-secret-btn {
+        position: fixed;
+        right: 1.25rem;
+        bottom: 1.25rem;
+        z-index: 45;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.55rem 0.95rem;
+        min-height: 44px;
+        border-radius: var(--radius-md);
+        background: rgba(255, 253, 249, 0.95);
+        color: var(--burgundy);
+        border: 1px solid var(--border-gold);
+        box-shadow: 0 8px 24px rgba(39, 28, 25, 0.14);
+        font-size: 0.84rem;
+        font-weight: 700;
+        cursor: pointer;
+        backdrop-filter: blur(8px);
+        transition:
+          transform 200ms var(--ease-out-expo),
+          box-shadow 200ms var(--ease-out-expo),
+          background-color 200ms;
+      }
+
+      .corner-secret-btn:hover {
+        transform: translateY(-2px);
+        background: #fff9ed;
+        box-shadow: 0 12px 28px rgba(107, 29, 47, 0.2);
+      }
+
+      /* ==========================================================================
+         11. TOAST NOTIFICATION
+         ========================================================================== */
+      .toast-region {
+        position: fixed;
+        left: 50%;
+        bottom: 1.5rem;
+        transform: translateX(-50%);
+        z-index: 100;
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .toast {
+        background: var(--ink-primary);
+        color: #fffaf2;
+        padding: 0.7rem 1.25rem;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--gold);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.24);
+        font-size: 0.9rem;
+        font-weight: 500;
+        opacity: 0;
+        transform: translateY(12px);
+        transition:
+          opacity 220ms var(--ease-out-expo),
+          transform 220ms var(--ease-out-expo);
+      }
+
+      .toast.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ==========================================================================
+         12. THE GREAT TOKAR TURKEY CHALLENGE — MODAL & GAME HUD
+         ========================================================================== */
+      .game-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 80;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        background: rgba(28, 17, 15, 0.78);
+        backdrop-filter: blur(6px);
+      }
+
+      .game-modal.open {
+        display: flex;
+      }
+
+      .game-shell {
+        width: 100%;
+        max-width: 920px;
+        max-height: 95vh;
+        overflow-y: auto;
+        background: #fffaf2;
+        border: 1.5px solid var(--gold);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-elevated);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .game-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.9rem 1.35rem;
+        background: var(--burgundy);
+        color: #fffaf2;
+        border-bottom: 1px solid rgba(197, 155, 39, 0.45);
+      }
+
+      .game-title-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.1rem;
+      }
+
+      .game-title-group h2 {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        margin: 0;
+        color: #fffaf2;
+      }
+
+      .game-stage-meta {
+        font-size: 0.8rem;
+        color: #f3d796;
+        font-weight: 500;
+      }
+
+      .game-topbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+      }
+
+      .game-hud-score {
+        font-family: var(--font-mono);
+        font-variant-numeric: tabular-nums;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #f9e4a7;
+        padding-right: 0.5rem;
+      }
+
+      .game-icon-btn {
+        min-height: 36px;
+        padding: 0.4rem 0.75rem;
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(255, 250, 242, 0.28);
+        background: rgba(255, 255, 255, 0.1);
+        color: #fffaf2;
+        font-size: 0.82rem;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background-color 160ms;
+      }
+
+      .game-icon-btn:hover {
+        background: rgba(255, 255, 255, 0.22);
+      }
+
+      .game-canvas-stage {
+        position: relative;
+        width: 100%;
+        background: #2f201b;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #turkey-game-canvas {
+        display: block;
+        width: 100%;
+        max-width: 920px;
+        aspect-ratio: 16 / 10;
+        touch-action: none;
+        cursor: crosshair;
+      }
+
+      .game-controls-bar {
+        padding: 1rem 1.35rem;
+        background: var(--bg-linen);
+        border-top: 1px solid var(--border-hairline);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.85rem;
+      }
+
+      .game-instruction {
+        font-size: 0.92rem;
+        color: var(--ink-primary);
+        font-weight: 500;
+        flex: 1 1 260px;
+      }
+
+      .game-tool-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: center;
+      }
+
+      .tool-btn {
+        min-height: 42px;
+        padding: 0.45rem 0.9rem;
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(107, 29, 47, 0.25);
+        background: #ffffff;
+        color: var(--ink-primary);
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+        transition:
+          background-color 160ms,
+          border-color 160ms,
+          transform 160ms;
+      }
+
+      .tool-btn:hover:not(:disabled) {
+        border-color: var(--terracotta);
+        transform: translateY(-1px);
+      }
+
+      .tool-btn.active {
+        background: var(--burgundy);
+        color: #fffaf2;
+        border-color: var(--burgundy);
+      }
+
+      .tool-btn.done {
+        background: var(--sage-soft);
+        color: var(--sage);
+        border-color: var(--sage);
+      }
+
+      /* ==========================================================================
+         13. RESPONSIVE & ACCESSIBILITY
+         ========================================================================== */
+      @media (max-width: 960px) {
+        .logistics-grid {
+          grid-template-columns: 1fr;
+          gap: 1.25rem;
+        }
+        .logistics-item + .logistics-item {
+          border-left: none;
+          border-top: 1px solid var(--border-hairline);
+          padding-left: 0.75rem;
+          padding-top: 1.25rem;
+        }
+        .menu-card,
+        .menu-card--featured,
+        .menu-card--wide {
+          grid-column: span 6;
+        }
+        .gratitude-layout {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Interactive Disguised SVG Secret Triggers */
+      .secret-svg-btn {
+        background: transparent;
+        border: 1px solid transparent;
+        padding: 0;
+        cursor: pointer;
+        border-radius: var(--radius-sm);
+        transition:
+          transform 220ms var(--ease-out-expo),
+          box-shadow 220ms var(--ease-out-expo),
+          border-color 220ms var(--ease-out-expo);
+      }
+
+      .secret-svg-btn:hover {
+        transform: scale(1.08) rotate(-3deg);
+      }
+
+      .secret-svg-btn:active {
+        transform: scale(0.96);
+      }
+
+      .menu-icon-wrap.secret-svg-btn:hover,
+      .feast-notes-icon.secret-svg-btn:hover {
+        border-color: var(--gold);
+        box-shadow: 0 6px 18px rgba(197, 155, 39, 0.25);
+      }
+
+      .gratitude-empty {
+        grid-column: 1 / -1;
+        padding: 2.25rem 1.5rem;
+        text-align: center;
+        background: var(--bg-card);
+        border: 1px dashed var(--border-gold);
+        border-radius: var(--radius-md);
+        color: var(--ink-secondary);
+      }
+
+      .gratitude-empty p {
+        margin: 0;
+        font-family: var(--font-display);
+        font-style: italic;
+        font-size: 1.08rem;
+        color: var(--burgundy);
+      }
+
+      .gratitude-empty span {
+        display: block;
+        margin-top: 0.4rem;
+        font-size: 0.9rem;
+        color: var(--ink-muted);
+      }
+
+      @media (max-width: 680px) {
+        .container {
+          padding: 0 1rem;
+        }
+        .header-inner {
+          padding: 0.6rem 1rem;
+          gap: 0.65rem;
+        }
+        .brand-wordmark {
+          font-size: 1.05rem;
+        }
+        .header-cta {
+          padding: 0.45rem 0.85rem;
+          font-size: 0.82rem;
+          min-height: 38px;
+        }
+        .nav-links {
+          display: none;
+        }
+        .hero-section {
+          padding: 1.25rem 0 2.5rem;
+        }
+        .invitation-card {
+          padding: 1.65rem 1.15rem;
+        }
+        .hero-kicker {
+          font-size: 0.74rem;
+          letter-spacing: 0.1em;
+        }
+        .hero-title {
+          font-size: clamp(1.7rem, 6.6vw, 2.3rem);
+          line-height: 1.16;
+        }
+        .hero-prose {
+          font-size: 0.98rem;
+          line-height: 1.72;
+          margin-bottom: 1.85rem;
+        }
+        .hero-prose::first-letter {
+          font-size: 2.65rem;
+          margin: 0.1rem 0.5rem 0 0;
+        }
+        .logistics-item {
+          padding: 0.25rem 0;
+        }
+        .logistics-item + .logistics-item {
+          padding-left: 0;
+          padding-top: 1.1rem;
+        }
+        .logistics-value {
+          font-size: 1.15rem;
+        }
+        .logistics-note {
+          font-size: 0.9rem;
+          overflow-wrap: anywhere;
+        }
+        .location-actions {
+          width: 100%;
+        }
+        .location-actions .btn {
+          flex: 1 1 135px;
+          min-height: 44px;
+        }
+        .section {
+          padding: 2.65rem 0;
+        }
+        .section-header {
+          margin-bottom: 2rem;
+        }
+        .menu-grid {
+          gap: 1rem;
+        }
+        .menu-card,
+        .menu-card--featured,
+        .menu-card--wide {
+          grid-column: span 12;
+          padding: 1.3rem;
+        }
+        .menu-icon-wrap {
+          width: 56px;
+          height: 56px;
+        }
+        .feast-notes-box {
+          grid-template-columns: 1fr;
+          text-align: left;
+          padding: 1.35rem;
+          gap: 1rem;
+        }
+        .gratitude-form-card {
+          padding: 1.35rem;
+        }
+        .form-input,
+        .form-textarea {
+          font-size: 16px;
+        }
+        .gratitude-grid {
+          grid-template-columns: 1fr;
+        }
+        .site-footer {
+          padding: 2rem 1rem 5.25rem;
+        }
+        .corner-secret-btn {
+          right: 0.85rem;
+          bottom: 0.85rem;
+          padding: 0.5rem 0.85rem;
+          font-size: 0.8rem;
+          min-height: 42px;
+        }
+        .toast-region {
+          bottom: 4.5rem;
+          width: calc(100vw - 2rem);
+          max-width: 400px;
+        }
+        .toast {
+          width: 100%;
+          text-align: center;
+          font-size: 0.86rem;
+        }
+        .game-modal {
+          padding: 0.45rem;
+        }
+        .game-shell {
+          max-height: 94dvh;
+        }
+        .game-topbar {
+          padding: 0.65rem 0.85rem;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+        .game-title-group h2 {
+          font-size: 1.02rem;
+        }
+        .game-topbar-actions {
+          width: 100%;
+          justify-content: space-between;
+        }
+        #turkey-game-canvas {
+          aspect-ratio: 4 / 3;
+        }
+        .game-controls-bar {
+          padding: 0.75rem 0.85rem;
+          gap: 0.6rem;
+        }
+        .game-instruction {
+          font-size: 0.84rem;
+          flex: 1 1 100%;
+        }
+        .game-tool-buttons {
+          width: 100%;
+        }
+        .tool-btn,
+        .game-tool-buttons .btn {
+          min-height: 42px;
+          padding: 0.4rem 0.7rem;
+          font-size: 0.82rem;
+          flex: 1 1 auto;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .gold-frame::before {
+          animation: none;
+        }
+        .reveal,
+        .keepsake-card.is-new {
+          transition: none;
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Ambient Drifting Autumn Leaves & Celebration Confetti Canvases -->
+    <canvas id="ambient-leaves-canvas" aria-hidden="true"></canvas>
+    <canvas id="celebration-canvas" aria-hidden="true"></canvas>
+
+    <!-- Top Navigation Bar (Strict 3-Zone Editorial Contract) -->
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="#invitation" class="brand-wordmark">The Tokar Table</a>
+
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a href="#invitation">Invitation</a>
+          <a href="#feast">The Feast</a>
+          <a href="#gratitude">Gratitude Wall</a>
+          <a href="#directions">Directions</a>
+        </nav>
+
+        <a href="#gratitude" class="header-cta">Share Gratitude</a>
+      </div>
+    </header>
+
+    <main>
+      <!-- ======================================================================
+           SECTION 1: HERO / FORMAL INVITATION HEADER
+           ====================================================================== -->
+      <section id="invitation" class="hero-section">
+        <div class="container">
+          <div class="invitation-card gold-frame reveal">
+            <!-- Detailed Inline SVG Harvest Crest (Easter Egg #4) -->
+            <div class="crest-wrapper">
+              <button
+                type="button"
+                id="egg-crest-btn"
+                class="secret-svg-btn"
+                title="Autumn Harvest Crest"
+                aria-label="Tap the autumn harvest crest for a secret surprise"
+              >
+                <svg width="112" height="72" viewBox="0 0 112 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="crestGold" x1="0" y1="0" x2="112" y2="72" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stop-color="#D9B44A" />
+                      <stop offset="50%" stop-color="#B08418" />
+                      <stop offset="100%" stop-color="#E6C667" />
+                    </linearGradient>
+                    <linearGradient id="crestLeaf" x1="30" y1="10" x2="80" y2="60" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stop-color="#C85A17" />
+                      <stop offset="100%" stop-color="#6B1D2F" />
+                    </linearGradient>
+                  </defs>
+                  <!-- Left Wheat & Oak Branch -->
+                  <path d="M12 52C22 44 33 40 44 42" stroke="url(#crestGold)" stroke-width="1.6" stroke-linecap="round" />
+                  <ellipse cx="22" cy="40" rx="6" ry="3" transform="rotate(-25 22 40)" fill="#C59B27" opacity="0.85" />
+                  <ellipse cx="32" cy="36" rx="6" ry="3" transform="rotate(-18 32 36)" fill="#4A5D4E" opacity="0.9" />
+                  <ellipse cx="26" cy="48" rx="5.5" ry="2.8" transform="rotate(15 26 48)" fill="#C85A17" opacity="0.8" />
+                  <!-- Right Wheat & Oak Branch -->
+                  <path d="M100 52C90 44 79 40 68 42" stroke="url(#crestGold)" stroke-width="1.6" stroke-linecap="round" />
+                  <ellipse cx="90" cy="40" rx="6" ry="3" transform="rotate(25 90 40)" fill="#C59B27" opacity="0.85" />
+                  <ellipse cx="80" cy="36" rx="6" ry="3" transform="rotate(18 80 36)" fill="#4A5D4E" opacity="0.9" />
+                  <ellipse cx="86" cy="48" rx="5.5" ry="2.8" transform="rotate(-15 86 48)" fill="#C85A17" opacity="0.8" />
+                  <!-- Center Maple Leaf & Medallion -->
+                  <circle cx="56" cy="36" r="21" stroke="url(#crestGold)" stroke-width="1.3" fill="#FAF6F0" />
+                  <circle cx="56" cy="36" r="17.5" stroke="url(#crestGold)" stroke-width="0.6" stroke-dasharray="2 2" />
+                  <path
+                    d="M56 21L59 29L66 27L62 34L68 38L60 40L61 45L56 43L51 45L52 40L44 38L50 34L46 27L53 29L56 21Z"
+                    fill="url(#crestLeaf)"
+                  />
+                  <path d="M56 43V51" stroke="#6B1D2F" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+              </button>
+            </div>
+
+            <p class="hero-kicker">Saturday, November 28th · Cleveland Heights, Ohio</p>
+            <h1 class="hero-title">You Are Cordially Invited to Thanksgiving at the Tokar’s</h1>
+
+            <div class="hero-divider">
+              <span class="hero-divider-line" aria-hidden="true"></span>
+              <!-- Easter Egg #5: Wishing Star -->
+              <button
+                type="button"
+                id="egg-star-btn"
+                class="secret-svg-btn"
+                style="padding: 4px"
+                title="Make a Thanksgiving wish"
+                aria-label="Tap the gold star for a Thanksgiving wish sparkle"
+              >
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M10 2L12.2 7.8L18 10L12.2 12.2L10 18L7.8 12.2L2 10L7.8 7.8L10 2Z" fill="#C59B27" />
+                </svg>
+              </button>
+              <span class="hero-divider-line" aria-hidden="true"></span>
+            </div>
+
+            <p class="hero-prose">
+              Pull up a chair at our family table for a warm, joyful Saturday filled with the crackle of autumn, friendly
+              living-room cheering over afternoon football, and the unmistakable comfort of homemade favorites straight
+              from the oven. Come early to settle in, pour a cold drink, catch up with everyone you love, and share a
+              moment reflecting on what we are most thankful for before we carve the bird and feast together.
+            </p>
+
+            <!-- Event Logistics Grid -->
+            <div id="directions" class="logistics-grid">
+              <div class="logistics-item">
+                <span class="logistics-label">Date</span>
+                <span class="logistics-value">Saturday, November 28th</span>
+                <span class="logistics-note">Family Thanksgiving Gathering</span>
+              </div>
+
+              <div class="logistics-item">
+                <span class="logistics-label">Time</span>
+                <span class="logistics-value">Eating starts at ~3:00 PM</span>
+                <span class="logistics-note">
+                  <span>Come early for football &amp; mingling!</span>
+                  <!-- Easter Egg #2: Secret Football Click -->
+                  <button
+                    type="button"
+                    id="egg-football-btn"
+                    class="egg-football-btn"
+                    title="Touchdown! Click for game-day spirit"
+                    aria-label="Click football for game-day cheer and confetti"
+                  >
+                    <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <ellipse cx="16" cy="16" rx="13" ry="8.5" transform="rotate(-24 16 16)" fill="#8B4513" stroke="#4F260B" stroke-width="1.4" />
+                      <path d="M7.5 19.8C10.5 14.5 17 11.5 24.5 12.2" stroke="#E6C667" stroke-width="0.9" opacity="0.55" />
+                      <path d="M12.5 17.5L19.5 14.5" stroke="#FFF8EB" stroke-width="1.6" stroke-linecap="round" />
+                      <path d="M13.8 15.2L15 17.8M16 14.2L17.2 16.8M18.2 13.2L19.4 15.8" stroke="#FFF8EB" stroke-width="1.3" stroke-linecap="round" />
+                    </svg>
+                  </button>
+                </span>
+              </div>
+
+              <div class="logistics-item">
+                <span class="logistics-label">Location</span>
+                <span class="logistics-value">The Tokar’s House</span>
+                <span class="logistics-note">3840 Kirkwood Road, Cleveland Heights, OH 44121</span>
+                <div class="location-actions">
+                  <button type="button" id="copy-address-btn" class="btn btn-primary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span>Copy Address</span>
+                  </button>
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=3840+Kirkwood+Road+Cleveland+Heights+OH+44121"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-outline"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    <span>View Map</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SECTION 2: THE THANKSGIVING FEAST (POTLUCK MENU)
+           ====================================================================== -->
+      <section id="feast" class="section">
+        <div class="container">
+          <header class="section-header reveal">
+            <p class="section-kicker">Potluck &amp; Table Assignments</p>
+            <h2 class="section-title">The Thanksgiving Feast</h2>
+            <p class="section-subtitle">
+              Every dish on the sideboard is made with love. Here is what everyone is bringing to the Tokar table.
+            </p>
+          </header>
+
+          <div class="menu-grid">
+            <!-- Card 1: Coleman & Jennie Tokar -->
+            <article class="menu-card menu-card--featured reveal">
+              <div class="menu-card-top">
+                <div>
+                  <h3 class="menu-host">Coleman &amp; Jennie Tokar</h3>
+                  <span class="menu-role">Hosts &amp; Main Course</span>
+                </div>
+                <div class="menu-icon-wrap" aria-hidden="true">
+                  <!-- Custom Shaded Roasted Turkey SVG -->
+                  <svg width="48" height="48" viewBox="0 0 64 64" fill="none">
+                    <defs>
+                      <radialGradient id="turkeyGrad" cx="45%" cy="38%" r="55%">
+                        <stop offset="0%" stop-color="#E58B3A" />
+                        <stop offset="65%" stop-color="#B04B17" />
+                        <stop offset="100%" stop-color="#6B250A" />
+                      </radialGradient>
+                    </defs>
+                    <ellipse cx="32" cy="49" rx="25" ry="6" fill="#D4C7B4" stroke="#9C8A75" stroke-width="1.2" />
+                    <ellipse cx="32" cy="47.5" rx="20" ry="3.5" fill="#EDE4D5" />
+                    <!-- Drumstick -->
+                    <path d="M43 38C49 35 55 38 54 42C53 45 46 46 41 43" fill="#9E3F12" stroke="#5A1E08" stroke-width="1.1" />
+                    <circle cx="55.5" cy="39.5" r="2.5" fill="#FAF2E4" />
+                    <!-- Turkey Body -->
+                    <path d="M14 42C12 31 20 21 32 21C42 21 48 29 46 41C44 45 18 46 14 42Z" fill="url(#turkeyGrad)" stroke="#5A1E08" stroke-width="1.2" />
+                    <!-- Crispy Highlight & Herb Flecks -->
+                    <ellipse cx="28" cy="29" rx="8" ry="4" transform="rotate(-12 28 29)" fill="#F7B76D" opacity="0.5" />
+                    <circle cx="25" cy="31" r="1" fill="#4A5D4E" />
+                    <circle cx="33" cy="28" r="1" fill="#4A5D4E" />
+                    <circle cx="36" cy="34" r="1" fill="#4A5D4E" />
+                    <!-- Garnish -->
+                    <circle cx="15" cy="46" r="2.2" fill="#6B1D2F" />
+                    <circle cx="18.5" cy="47.5" r="2" fill="#6B1D2F" />
+                    <path d="M44 47C47 45 50 45 52 47" stroke="#4A5D4E" stroke-width="2" stroke-linecap="round" />
+                  </svg>
+                </div>
+              </div>
+              <ul class="menu-dishes">
+                <li><span class="dish-bullet" aria-hidden="true">·</span> Roasted Turkey</li>
+                <li><span class="dish-bullet" aria-hidden="true">·</span> Mac &amp; Cheese</li>
+                <li><span class="dish-bullet" aria-hidden="true">·</span> Carrots &amp; Brussels Sprouts</li>
+              </ul>
+              <!-- Easter Egg #3: Secret Chef's Hat / Glowing Turkey Trigger -->
+              <button
+                type="button"
+                class="secret-chef-trigger launch-game-btn"
+                title="Psst... click to enter the Tokar Kitchen mini-game!"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M6 14C4.2 14 3 12.6 3 10.9C3 9.3 4.1 8 5.6 7.8C6.3 5.6 8.4 4 11 4C11.4 4 11.7 4 12 4.1C12.3 4 12.6 4 13 4C15.6 4 17.7 5.6 18.4 7.8C19.9 8 21 9.3 21 10.9C21 12.6 19.8 14 18 14V18C18 19.1 17.1 20 16 20H8C6.9 20 6 19.1 6 18V14Z"
+                    fill="#FFFDF9"
+                    stroke="#B08418"
+                    stroke-width="1.6"
+                  />
+                  <path d="M6 16H18" stroke="#C59B27" stroke-width="1.4" />
+                </svg>
+                <span>Secret Kitchen Challenge</span>
+              </button>
+            </article>
+
+            <!-- Card 2: Jackie & Brandon Yurik -->
+            <article class="menu-card menu-card--wide reveal">
+              <div class="menu-card-top">
+                <div>
+                  <h3 class="menu-host">Jackie &amp; Brandon Yurik</h3>
+                  <span class="menu-role">Comfort Classic</span>
+                </div>
+                <button
+                  type="button"
+                  id="egg-potatoes-btn"
+                  class="menu-icon-wrap secret-svg-btn"
+                  title="Extra butter?"
+                  aria-label="Tap mashed potatoes for an extra pat of butter secret"
+                >
+                  <!-- Custom Shaded Mashed Potatoes SVG -->
+                  <svg width="48" height="48" viewBox="0 0 64 64" fill="none">
+                    <path d="M13 36C13 48 21 53 32 53C43 53 51 48 51 36H13Z" fill="#6B1D2F" stroke="#47101D" stroke-width="1.3" />
+                    <ellipse cx="32" cy="36" rx="19" ry="4" fill="#84273C" />
+                    <path
+                      d="M16 35C18 25 25 22 32 22C40 22 46 26 48 35C41 37 22 37 16 35Z"
+                      fill="#FAF0D7"
+                      stroke="#DFC99B"
+                      stroke-width="1.2"
+                    />
+                    <!-- Butter Pat & Gravy Swirl -->
+                    <rect x="28" y="23" width="8" height="6" rx="1.5" transform="rotate(-8 28 23)" fill="#F3C14B" stroke="#C59B27" stroke-width="1" />
+                    <path d="M23 29C27 32 36 32 40 28" stroke="#D19A45" stroke-width="1.8" stroke-linecap="round" opacity="0.7" />
+                    <circle cx="24" cy="27" r="1" fill="#4A5D4E" />
+                    <circle cx="38" cy="31" r="1" fill="#4A5D4E" />
+                  </svg>
+                </button>
+              </div>
+              <ul class="menu-dishes">
+                <li><span class="dish-bullet" aria-hidden="true">·</span> Mashed Potatoes</li>
+              </ul>
+            </article>
+
+            <!-- Card 3: Scotty & Kristin -->
+            <article class="menu-card reveal">
+              <div class="menu-card-top">
+                <div>
+                  <h3 class="menu-host">Scotty &amp; Kristin</h3>
+                  <span class="menu-role">Savory &amp; Sweet Request</span>
+                </div>
+                <button
+                  type="button"
+                  id="egg-popcorn-btn"
+                  class="menu-icon-wrap secret-svg-btn"
+                  title="Freshly popped!"
+                  aria-label="Tap popcorn cup to pop a secret popcorn shower"
+                >
+                  <!-- Custom Popcorn Dessert & Rice Bowl SVG -->
+                  <svg width="48" height="48" viewBox="0 0 64 64" fill="none">
+                    <path d="M18 31L22 53H42L46 31H18Z" fill="#FAF6F0" stroke="#6B1D2F" stroke-width="1.4" />
+                    <path d="M24 31L26 53M32 31V53M40 31L38 53" stroke="#C85A17" stroke-width="2.4" />
+                    <!-- Fluffy Popcorn Clusters -->
+                    <circle cx="23" cy="28" r="5" fill="#FFF7DE" stroke="#D9B44A" stroke-width="1" />
+                    <circle cx="31" cy="23" r="5.5" fill="#FFFDF5" stroke="#D9B44A" stroke-width="1" />
+                    <circle cx="39" cy="27" r="5" fill="#FFF4D2" stroke="#D9B44A" stroke-width="1" />
+                    <circle cx="27" cy="29" r="4.5" fill="#FBE6A6" stroke="#C59B27" stroke-width="1" />
+                    <circle cx="35" cy="29" r="4.5" fill="#FFFDF5" stroke="#D9B44A" stroke-width="1" />
+                    <path d="M27 25C30 23 35 24 38 27" stroke="#C85A17" stroke-width="1.3" stroke-linecap="round" />
+                  </svg>
+                </button>
+              </div>
+              <ul class="menu-dishes">
+                <li><span class="dish-bullet" aria-hidden="true">·</span> Rice</li>
+                <li>
+                  <span class="dish-bullet" aria-hidden="true">·</span>
+                  <span><span class="special-request">Special Request:</span> Popcorn Dessert</span>
+                </li>
+              </ul>
+            </article>
+
+            <!-- Card 4: Joni -->
+            <article class="menu-card reveal">
+              <div class="menu-card-top">
+                <div>
+                  <h3 class="menu-host">Joni</h3>
+                  <span class="menu-role">Garden &amp; Bakery</span>
+                </div>
+                <button
+                  type="button"
+                  id="egg-pie-btn"
+                  class="menu-icon-wrap secret-svg-btn"
+                  title="Save room for dessert!"
+                  aria-label="Tap pie slice for a secret dessert sparkle"
+                >
+                  <!-- Custom Green Beans & Pie Slice SVG -->
+                  <svg width="48" height="48" viewBox="0 0 64 64" fill="none">
+                    <!-- Green Beans -->
+                    <path d="M12 42C19 36 27 34 36 37" stroke="#4A5D4E" stroke-width="3.2" stroke-linecap="round" />
+                    <path d="M14 47C22 42 30 41 38 43" stroke="#5E7A63" stroke-width="3.2" stroke-linecap="round" />
+                    <!-- Pie Slice -->
+                    <path d="M30 45L52 45L46 28L30 45Z" fill="#C85A17" stroke="#7A3107" stroke-width="1.2" />
+                    <path d="M46 28L53 31L52 45L46 28Z" fill="#DFA763" stroke="#7A3107" stroke-width="1.1" />
+                    <path d="M30 45H52V49H30V45Z" fill="#E3B375" stroke="#7A3107" stroke-width="1.1" />
+                    <!-- Whipped Cream Swirl -->
+                    <path d="M37 33C37 30 42 29 43 32C44 34 39 36 37 33Z" fill="#FFFDF9" stroke="#D9CBB8" stroke-width="1" />
+                  </svg>
+                </button>
+              </div>
+              <ul class="menu-dishes">
+                <li><span class="dish-bullet" aria-hidden="true">·</span> Green Beans</li>
+                <li><span class="dish-bullet" aria-hidden="true">·</span> Dessert</li>
+              </ul>
+            </article>
+
+            <!-- Card 5: Jason -->
+            <article class="menu-card reveal">
+              <div class="menu-card-top">
+                <div>
+                  <h3 class="menu-host">Jason</h3>
+                  <span class="menu-role">Game-Day Appetizer</span>
+                </div>
+                <button
+                  type="button"
+                  id="egg-skillet-btn"
+                  class="menu-icon-wrap secret-svg-btn"
+                  title="Hot skillet!"
+                  aria-label="Tap corn dip skillet for a sizzling secret"
+                >
+                  <!-- Custom Skillet Corn Dip & Chips SVG -->
+                  <svg width="48" height="48" viewBox="0 0 64 64" fill="none">
+                    <!-- Skillet -->
+                    <path d="M46 41H57" stroke="#3B2F2D" stroke-width="3.5" stroke-linecap="round" />
+                    <ellipse cx="30" cy="41" rx="18" ry="9" fill="#3B2F2D" />
+                    <ellipse cx="30" cy="39.5" rx="15" ry="6.8" fill="#F2C14E" />
+                    <!-- Corn Kernels & Jalapeno/Pepper Specks -->
+                    <circle cx="24" cy="39" r="1.8" fill="#FFE380" />
+                    <circle cx="31" cy="41" r="1.8" fill="#FFE380" />
+                    <circle cx="36" cy="38" r="1.8" fill="#FFE380" />
+                    <circle cx="28" cy="37" r="1.3" fill="#C85A17" />
+                    <circle cx="33" cy="40" r="1.1" fill="#4A5D4E" />
+                    <!-- Tortilla Chips -->
+                    <path d="M22 33L29 22L35 33H22Z" fill="#E6AE4B" stroke="#B37D22" stroke-width="1.1" />
+                    <path d="M32 35L41 24L44 36H32Z" fill="#F0BD5E" stroke="#B37D22" stroke-width="1.1" />
+                  </svg>
+                </button>
+              </div>
+              <ul class="menu-dishes">
+                <li><span class="dish-bullet" aria-hidden="true">·</span> Corn Dip &amp; Chips</li>
+              </ul>
+            </article>
+          </div>
+
+          <!-- Additional Notes & Beverage Box -->
+          <div class="feast-notes-box gold-frame reveal">
+            <button
+              type="button"
+              id="egg-beer-btn"
+              class="feast-notes-icon secret-svg-btn"
+              title="Cheers!"
+              aria-label="Tap winter beer mug for a holiday toast secret"
+            >
+              <!-- Custom Winter Beer & Clinking Glass SVG -->
+              <svg width="46" height="46" viewBox="0 0 56 56" fill="none">
+                <path d="M16 18H34L32 46H18L16 18Z" fill="#C85A17" stroke="#5A250A" stroke-width="1.4" />
+                <path d="M16 18C16 14 21 12 25 14C29 12 34 14 34 18H16Z" fill="#FFFDF9" stroke="#D9CBB8" stroke-width="1.2" />
+                <path d="M34 23H39C41 23 42 25 42 28V35C42 38 40 39 38 39H33" stroke="#5A250A" stroke-width="1.6" stroke-linecap="round" />
+                <circle cx="22" cy="28" r="1.2" fill="#F9E4A7" opacity="0.8" />
+                <circle cx="27" cy="34" r="1.4" fill="#F9E4A7" opacity="0.8" />
+                <circle cx="24" cy="39" r="1" fill="#F9E4A7" opacity="0.8" />
+                <!-- Holly/Pine Sprig -->
+                <path d="M36 44C40 41 44 40 48 41" stroke="#4A5D4E" stroke-width="1.8" stroke-linecap="round" />
+                <circle cx="40" cy="43" r="1.8" fill="#6B1D2F" />
+                <circle cx="43.5" cy="44" r="1.6" fill="#6B1D2F" />
+              </svg>
+            </button>
+            <div class="feast-notes-content">
+              <h3>Extra Dishes &amp; Holiday Cheer</h3>
+              <p>
+                Feeling inspired in the kitchen? Please feel free to bring any additional appetizers, sides, or desserts
+                you desire — there is always room at the Tokar table!
+              </p>
+              <p>
+                “While the Tokars will have a variety of winter &amp; Christmas beers on hand, please BYOB for your
+                favorite beverages.”
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           SECTION 3: INTERACTIVE GRATITUDE WALL
+           ====================================================================== -->
+      <section id="gratitude" class="section">
+        <div class="container">
+          <header class="section-header reveal">
+            <p class="section-kicker">Family Keepsake Board</p>
+            <h2 class="section-title">What Are You Thankful For?</h2>
+            <p class="section-subtitle">
+              Add a note before we gather on Saturday. Every message is saved right to your keepsake board for the big
+              day.
+            </p>
+          </header>
+
+          <div class="gratitude-layout">
+            <!-- Entry Form -->
+            <form id="gratitude-form" class="gratitude-form-card reveal" novalidate>
+              <h3>Leave a Gratitude Note</h3>
+              <p>Share a person, memory, or little joy you are grateful for this year.</p>
+
+              <div class="form-group">
+                <label for="gratitude-name">Your Name</label>
+                <input
+                  id="gratitude-name"
+                  name="name"
+                  type="text"
+                  class="form-input"
+                  placeholder="e.g., Aunt Joni"
+                  maxlength="48"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="gratitude-message">What Are You Thankful For?</label>
+                <textarea
+                  id="gratitude-message"
+                  name="message"
+                  class="form-textarea"
+                  placeholder="Write a warm note for the family board..."
+                  maxlength="240"
+                  required
+                ></textarea>
+              </div>
+
+              <div id="gratitude-error" class="form-error" role="alert" aria-live="polite"></div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%">Post to Gratitude Board</button>
+            </form>
+
+            <!-- Gratitude Keepsake Board -->
+            <div class="reveal">
+              <div class="gratitude-board-header">
+                <h3 style="font-family: var(--font-display); margin: 0; color: var(--burgundy); font-size: 1.3rem">
+                  Shared Gratitude Board
+                </h3>
+                <span id="gratitude-count" class="gratitude-count">0 entries</span>
+              </div>
+
+              <div id="gratitude-grid" class="gratitude-grid" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ========================================================================
+         FOOTER & HIDDEN ACORN SECRET
+         ======================================================================== -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-copy">
+          <span>With love from Coleman &amp; Jennie Tokar · 3840 Kirkwood Road, Cleveland Heights</span>
+          <!-- Easter Egg #1: Tiny Hidden Acorn -->
+          <button
+            type="button"
+            id="egg-acorn-btn"
+            class="egg-acorn-btn"
+            title="A lucky autumn acorn..."
+            aria-label="Hidden golden acorn secret"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M12 3V6" stroke="#5A381E" stroke-width="1.8" stroke-linecap="round" />
+              <path d="M6 10C6 7.2 8.7 5.5 12 5.5C15.3 5.5 18 7.2 18 10H6Z" fill="#7A4B2A" stroke="#4D2E18" stroke-width="1.2" />
+              <path d="M7.5 10.5C7.5 15.5 9.6 19.5 12 20.5C14.4 19.5 16.5 15.5 16.5 10.5H7.5Z" fill="#C59B27" stroke="#8C6A11" stroke-width="1.2" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="footer-secrets-hint">
+          <span id="secrets-progress">10 autumn secrets hidden around this invitation</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Subtle Corner Button to Launch Secret Mini-Game Easily -->
+    <button
+      type="button"
+      id="corner-secret-btn"
+      class="corner-secret-btn launch-game-btn"
+      aria-label="Open Chef's Secret mini-game: The Great Tokar Turkey Challenge"
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path
+          d="M6 14C4.2 14 3 12.6 3 10.9C3 9.3 4.1 8 5.6 7.8C6.3 5.6 8.4 4 11 4C11.4 4 11.7 4 12 4.1C12.3 4 12.6 4 13 4C15.6 4 17.7 5.6 18.4 7.8C19.9 8 21 9.3 21 10.9C21 12.6 19.8 14 18 14V18C18 19.1 17.1 20 16 20H8C6.9 20 6 19.1 6 18V14Z"
+          fill="#FFFDF9"
+          stroke="#6B1D2F"
+          stroke-width="1.7"
+        />
+        <path d="M6 16H18" stroke="#C59B27" stroke-width="1.6" />
+      </svg>
+      <span>Chef’s Secret</span>
+    </button>
+
+    <!-- Toast Region -->
+    <div class="toast-region" aria-live="polite">
+      <div id="toast" class="toast" role="status"></div>
+    </div>
+
+    <!-- ========================================================================
+         SECRET MINI-GAME MODAL: THE GREAT TOKAR TURKEY CHALLENGE
+         ======================================================================== -->
+    <div
+      id="game-modal"
+      class="game-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="game-modal-title"
+    >
+      <div class="game-shell">
+        <div class="game-topbar">
+          <div class="game-title-group">
+            <h2 id="game-modal-title">The Great Tokar Turkey Challenge</h2>
+            <span id="game-stage-meta" class="game-stage-meta">Welcome to the Tokar Kitchen</span>
+          </div>
+
+          <div class="game-topbar-actions">
+            <span id="game-hud-score" class="game-hud-score">Score: 0</span>
+            <button type="button" id="game-mute-btn" class="game-icon-btn" aria-pressed="false">Sound On</button>
+            <button type="button" id="game-close-btn" class="game-icon-btn">Close</button>
+          </div>
+        </div>
+
+        <div class="game-canvas-stage">
+          <canvas id="turkey-game-canvas" width="920" height="575"></canvas>
+        </div>
+
+        <div class="game-controls-bar">
+          <div id="game-instruction" class="game-instruction">
+            Get ready to prep, roast, and carve the centerpiece Thanksgiving turkey!
+          </div>
+          <div id="game-tool-buttons" class="game-tool-buttons"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================
+         VANILLA JAVASCRIPT: AMBIENT LEAVES, AUDIO FX, GRATITUDE WALL & CANVAS GAME
+         ======================================================================== -->
+    <script>
+      (() => {
+        'use strict';
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        /* ----------------------------------------------------------------------
+           1. TOAST NOTIFICATION HELPER
+           ---------------------------------------------------------------------- */
+        const toastEl = document.getElementById('toast');
+        let toastTimer = null;
+
+        function showToast(message) {
+          toastEl.textContent = message;
+          toastEl.classList.add('show');
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(() => {
+            toastEl.classList.remove('show');
+          }, 3000);
+        }
+
+        /* ----------------------------------------------------------------------
+           2. WEB AUDIO API SOUND SYNTHESIZER (Zero External Audio Assets)
+           ---------------------------------------------------------------------- */
+        const HolidayAudio = (() => {
+          let ctx = null;
+          let muted = false;
+
+          function ensureCtx() {
+            if (muted) return null;
+            if (!ctx) {
+              const AudioCtx = window.AudioContext || window.webkitAudioContext;
+              if (AudioCtx) ctx = new AudioCtx();
+            }
+            if (ctx && ctx.state === 'suspended') {
+              ctx.resume().catch(() => {});
+            }
+            return ctx;
+          }
+
+          function playTone(freq, duration, type = 'sine', gainVal = 0.08, delay = 0) {
+            const c = ensureCtx();
+            if (!c) return;
+            const now = c.currentTime + delay;
+            const osc = c.createOscillator();
+            const gain = c.createGain();
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, now);
+            gain.gain.setValueAtTime(0.0001, now);
+            gain.gain.exponentialRampToValueAtTime(gainVal, now + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+            osc.connect(gain);
+            gain.connect(c.destination);
+            osc.start(now);
+            osc.stop(now + duration + 0.02);
+          }
+
+          function playNoise(duration, filterFreq, gainVal = 0.07) {
+            const c = ensureCtx();
+            if (!c) return;
+            const bufferSize = Math.floor(c.sampleRate * duration);
+            const buffer = c.createBuffer(1, bufferSize, c.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+              data[i] = Math.random() * 2 - 1;
+            }
+            const noise = c.createBufferSource();
+            noise.buffer = buffer;
+
+            const filter = c.createBiquadFilter();
+            filter.type = 'bandpass';
+            filter.frequency.value = filterFreq;
+            filter.Q.value = 1.4;
+
+            const gain = c.createGain();
+            const now = c.currentTime;
+            gain.gain.setValueAtTime(gainVal, now);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+            noise.connect(filter);
+            filter.connect(gain);
+            gain.connect(c.destination);
+            noise.start(now);
+          }
+
+          return {
+            get muted() {
+              return muted;
+            },
+            toggleMute() {
+              muted = !muted;
+              return muted;
+            },
+            chime() {
+              playTone(523.25, 0.22, 'triangle', 0.07, 0);
+              playTone(659.25, 0.24, 'triangle', 0.07, 0.08);
+              playTone(783.99, 0.35, 'triangle', 0.08, 0.16);
+              playTone(1046.5, 0.45, 'sine', 0.06, 0.24);
+            },
+            stadiumCheer() {
+              playNoise(0.95, 900, 0.09);
+              playTone(392, 0.14, 'triangle', 0.08, 0.02);
+              playTone(523.25, 0.16, 'triangle', 0.08, 0.16);
+              playTone(659.25, 0.32, 'triangle', 0.09, 0.3);
+            },
+            sprinkle() {
+              playTone(880 + Math.random() * 340, 0.07, 'sine', 0.035, 0);
+            },
+            sizzle() {
+              playNoise(0.32, 2600, 0.06);
+            },
+            slice() {
+              playNoise(0.18, 3200, 0.07);
+              playTone(587.33, 0.16, 'triangle', 0.07, 0.05);
+              playTone(880, 0.22, 'sine', 0.06, 0.12);
+            },
+            fanfare() {
+              const notes = [523.25, 659.25, 783.99, 1046.5];
+              notes.forEach((n, idx) => playTone(n, 0.32, 'triangle', 0.08, idx * 0.1));
+            },
+            pop() {
+              playTone(320 + Math.random() * 240, 0.08, 'sine', 0.08, 0);
+              playTone(680 + Math.random() * 260, 0.07, 'triangle', 0.06, 0.03);
+            },
+            clink() {
+              playTone(1480, 0.25, 'sine', 0.07, 0);
+              playTone(2220, 0.32, 'sine', 0.05, 0.02);
+              playNoise(0.28, 3600, 0.04);
+            },
+            harp() {
+              const notes = [523.25, 659.25, 783.99, 987.77, 1174.66];
+              notes.forEach((n, idx) => playTone(n, 0.4, 'sine', 0.06, idx * 0.06));
+            },
+            butterMelt() {
+              playTone(440, 0.25, 'sine', 0.06, 0);
+              playTone(554.37, 0.28, 'sine', 0.06, 0.08);
+              playTone(659.25, 0.35, 'triangle', 0.05, 0.16);
+            },
+            wishSparkle() {
+              const notes = [880, 1108.73, 1318.51, 1760];
+              notes.forEach((n, idx) => playTone(n, 0.28, 'sine', 0.055, idx * 0.05));
+            },
+          };
+        })();
+
+        /* ----------------------------------------------------------------------
+           3. AMBIENT FALLING AUTUMN LEAVES CANVAS
+           ---------------------------------------------------------------------- */
+        const ambientCanvas = document.getElementById('ambient-leaves-canvas');
+        const ambientCtx = ambientCanvas.getContext('2d');
+        const leafPalette = ['#C85A17', '#C59B27', '#6B1D2F', '#4A5D4E', '#B76E2E'];
+        let ambientLeaves = [];
+
+        function resizeAmbient() {
+          ambientCanvas.width = window.innerWidth;
+          ambientCanvas.height = window.innerHeight;
+        }
+
+        function createLeaf(randomY = false) {
+          return {
+            x: Math.random() * ambientCanvas.width,
+            y: randomY ? Math.random() * ambientCanvas.height : -24,
+            size: 7 + Math.random() * 10,
+            speedY: 0.35 + Math.random() * 0.55,
+            swayAmp: 0.4 + Math.random() * 0.9,
+            swayPhase: Math.random() * Math.PI * 2,
+            rot: Math.random() * Math.PI * 2,
+            rotSpeed: (Math.random() - 0.5) * 0.018,
+            color: leafPalette[Math.floor(Math.random() * leafPalette.length)],
+            alpha: 0.22 + Math.random() * 0.28,
+          };
+        }
+
+        function drawLeafShape(ctx, size) {
+          ctx.beginPath();
+          ctx.moveTo(0, -size);
+          ctx.quadraticCurveTo(size * 0.85, -size * 0.35, size * 0.55, size * 0.55);
+          ctx.quadraticCurveTo(0, size * 0.95, 0, size);
+          ctx.quadraticCurveTo(0, size * 0.95, -size * 0.55, size * 0.55);
+          ctx.quadraticCurveTo(-size * 0.85, -size * 0.35, 0, -size);
+          ctx.fill();
+          ctx.beginPath();
+          ctx.moveTo(0, -size * 0.8);
+          ctx.lineTo(0, size * 1.15);
+          ctx.strokeStyle = 'rgba(255, 250, 242, 0.35)';
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+
+        function initAmbientLeaves() {
+          resizeAmbient();
+          const count = window.innerWidth < 680 ? 12 : 22;
+          ambientLeaves = Array.from({ length: count }, () => createLeaf(true));
+        }
+
+        function tickAmbientLeaves() {
+          ambientCtx.clearRect(0, 0, ambientCanvas.width, ambientCanvas.height);
+          for (const leaf of ambientLeaves) {
+            if (!prefersReducedMotion) {
+              leaf.y += leaf.speedY;
+              leaf.swayPhase += 0.018;
+              leaf.x += Math.sin(leaf.swayPhase) * leaf.swayAmp;
+              leaf.rot += leaf.rotSpeed;
+              if (leaf.y > ambientCanvas.height + 28) {
+                Object.assign(leaf, createLeaf(false));
+              }
+            }
+            ambientCtx.save();
+            ambientCtx.translate(leaf.x, leaf.y);
+            ambientCtx.rotate(leaf.rot);
+            ambientCtx.globalAlpha = leaf.alpha;
+            ambientCtx.fillStyle = leaf.color;
+            drawLeafShape(ambientCtx, leaf.size);
+            ambientCtx.restore();
+          }
+          if (!prefersReducedMotion) {
+            requestAnimationFrame(tickAmbientLeaves);
+          }
+        }
+
+        window.addEventListener('resize', resizeAmbient);
+        initAmbientLeaves();
+        tickAmbientLeaves();
+
+        /* ----------------------------------------------------------------------
+           4. CELEBRATION OVERLAY (CONFETTI & GOLDEN LEAF SHOWER)
+           ---------------------------------------------------------------------- */
+        const celebCanvas = document.getElementById('celebration-canvas');
+        const celebCtx = celebCanvas.getContext('2d');
+        let celebParticles = [];
+        let celebRunning = false;
+
+        function resizeCeleb() {
+          celebCanvas.width = window.innerWidth;
+          celebCanvas.height = window.innerHeight;
+        }
+        resizeCeleb();
+        window.addEventListener('resize', resizeCeleb);
+
+        function spawnGoldenLeafShower() {
+          for (let i = 0; i < 65; i++) {
+            celebParticles.push({
+              kind: 'leaf',
+              x: Math.random() * celebCanvas.width,
+              y: -20 - Math.random() * 240,
+              vx: (Math.random() - 0.5) * 2.2,
+              vy: 2.2 + Math.random() * 2.8,
+              size: 8 + Math.random() * 10,
+              rot: Math.random() * Math.PI * 2,
+              rotSpeed: (Math.random() - 0.5) * 0.09,
+              color: Math.random() > 0.35 ? '#C59B27' : '#E2BE53',
+              life: 1,
+              decay: 0.0038,
+            });
+          }
+          startCelebLoop();
+        }
+
+        function spawnConfettiBurst(originX, originY) {
+          const colors = ['#6B1D2F', '#C85A17', '#C59B27', '#4A5D4E', '#FFFDF9'];
+          for (let i = 0; i < 75; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const speed = 3 + Math.random() * 8.5;
+            celebParticles.push({
+              kind: 'confetti',
+              x: originX,
+              y: originY,
+              vx: Math.cos(angle) * speed,
+              vy: Math.sin(angle) * speed - 3.5,
+              size: 5 + Math.random() * 6,
+              rot: Math.random() * Math.PI * 2,
+              rotSpeed: (Math.random() - 0.5) * 0.22,
+              color: colors[Math.floor(Math.random() * colors.length)],
+              life: 1,
+              decay: 0.011,
+            });
+          }
+          startCelebLoop();
+        }
+
+        function spawnPopcornBurst(originX, originY) {
+          const colors = ['#FFFDF5', '#FFF2C6', '#FBE6A6', '#E5B95C'];
+          for (let i = 0; i < 42; i++) {
+            const angle = -Math.PI / 2 + (Math.random() - 0.5) * 1.4;
+            const speed = 4 + Math.random() * 8;
+            celebParticles.push({
+              kind: 'popcorn',
+              x: originX,
+              y: originY,
+              vx: Math.cos(angle) * speed,
+              vy: Math.sin(angle) * speed - 2,
+              size: 5 + Math.random() * 5,
+              rot: Math.random() * Math.PI * 2,
+              rotSpeed: (Math.random() - 0.5) * 0.18,
+              color: colors[Math.floor(Math.random() * colors.length)],
+              life: 1,
+              decay: 0.011,
+            });
+          }
+          startCelebLoop();
+        }
+
+        function spawnBubbles(originX, originY) {
+          for (let i = 0; i < 38; i++) {
+            celebParticles.push({
+              kind: 'bubble',
+              x: originX + (Math.random() - 0.5) * 44,
+              y: originY,
+              vx: (Math.random() - 0.5) * 1.6,
+              vy: -2.2 - Math.random() * 3.2,
+              size: 4 + Math.random() * 7,
+              rot: 0,
+              rotSpeed: 0,
+              color: Math.random() > 0.4 ? '#F6C85F' : '#FFFDF9',
+              life: 1,
+              decay: 0.012,
+            });
+          }
+          startCelebLoop();
+        }
+
+        function spawnSparkleRing(originX, originY, palette) {
+          for (let i = 0; i < 45; i++) {
+            const angle = (i / 45) * Math.PI * 2 + Math.random() * 0.2;
+            const speed = 2.5 + Math.random() * 6;
+            celebParticles.push({
+              kind: 'confetti',
+              x: originX,
+              y: originY,
+              vx: Math.cos(angle) * speed,
+              vy: Math.sin(angle) * speed - 1.5,
+              size: 4 + Math.random() * 5,
+              rot: Math.random() * Math.PI * 2,
+              rotSpeed: (Math.random() - 0.5) * 0.2,
+              color: palette[Math.floor(Math.random() * palette.length)],
+              life: 1,
+              decay: 0.013,
+            });
+          }
+          startCelebLoop();
+        }
+
+        function startCelebLoop() {
+          if (celebRunning) return;
+          celebRunning = true;
+          requestAnimationFrame(tickCeleb);
+        }
+
+        function tickCeleb() {
+          celebCtx.clearRect(0, 0, celebCanvas.width, celebCanvas.height);
+          celebParticles = celebParticles.filter((p) => p.life > 0 && p.y < celebCanvas.height + 40 && p.y > -320);
+
+          for (const p of celebParticles) {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.rot += p.rotSpeed;
+            p.life -= p.decay;
+            if (p.kind === 'confetti' || p.kind === 'popcorn') {
+              p.vy += 0.22;
+              p.vx *= 0.99;
+            } else if (p.kind === 'bubble') {
+              p.vx += Math.sin(p.y * 0.06) * 0.08;
+            } else {
+              p.vx += Math.sin(p.y * 0.03) * 0.08;
+            }
+
+            celebCtx.save();
+            celebCtx.translate(p.x, p.y);
+            celebCtx.rotate(p.rot);
+            celebCtx.globalAlpha = Math.max(0, p.life);
+            celebCtx.fillStyle = p.color;
+            if (p.kind === 'leaf') {
+              drawLeafShape(celebCtx, p.size);
+            } else if (p.kind === 'popcorn') {
+              celebCtx.beginPath();
+              celebCtx.arc(0, 0, p.size * 0.65, 0, Math.PI * 2);
+              celebCtx.arc(p.size * 0.45, -p.size * 0.2, p.size * 0.45, 0, Math.PI * 2);
+              celebCtx.arc(-p.size * 0.4, -p.size * 0.25, p.size * 0.45, 0, Math.PI * 2);
+              celebCtx.fill();
+            } else if (p.kind === 'bubble') {
+              celebCtx.strokeStyle = p.color;
+              celebCtx.lineWidth = 1.6;
+              celebCtx.beginPath();
+              celebCtx.arc(0, 0, p.size, 0, Math.PI * 2);
+              celebCtx.stroke();
+            } else {
+              celebCtx.fillRect(-p.size / 2, -p.size * 0.3, p.size, p.size * 0.6);
+            }
+            celebCtx.restore();
+          }
+
+          if (celebParticles.length > 0) {
+            requestAnimationFrame(tickCeleb);
+          } else {
+            celebRunning = false;
+            celebCtx.clearRect(0, 0, celebCanvas.width, celebCanvas.height);
+          }
+        }
+
+        /* ----------------------------------------------------------------------
+           5. SCROLL REVEAL OBSERVER
+           ---------------------------------------------------------------------- */
+        const revealEls = document.querySelectorAll('.reveal');
+        if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+          revealEls.forEach((el) => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top > window.innerHeight * 0.95) {
+              el.classList.add('reveal-pending');
+            }
+          });
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.remove('reveal-pending');
+                  entry.target.classList.add('reveal-visible');
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.08 }
+          );
+          revealEls.forEach((el) => observer.observe(el));
+        }
+
+        /* ----------------------------------------------------------------------
+           6. COPY ADDRESS BUTTON
+           ---------------------------------------------------------------------- */
+        const ADDRESS_TEXT = '3840 Kirkwood Road, Cleveland Heights, OH 44121';
+        const copyBtn = document.getElementById('copy-address-btn');
+
+        copyBtn.addEventListener('click', async () => {
+          try {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              await navigator.clipboard.writeText(ADDRESS_TEXT);
+            } else {
+              const tmp = document.createElement('textarea');
+              tmp.value = ADDRESS_TEXT;
+              tmp.style.position = 'fixed';
+              tmp.style.opacity = '0';
+              document.body.appendChild(tmp);
+              tmp.select();
+              document.execCommand('copy');
+              document.body.removeChild(tmp);
+            }
+            showToast('Address copied: 3840 Kirkwood Road, Cleveland Heights!');
+          } catch {
+            showToast('3840 Kirkwood Road, Cleveland Heights, OH 44121');
+          }
+        });
+
+        /* ----------------------------------------------------------------------
+           7. EASTER EGGS TRACKING & TRIGGERS (10 Interactive Secrets)
+           ---------------------------------------------------------------------- */
+        const TOTAL_SECRETS = 10;
+        const foundSecrets = new Set();
+        const secretsHintEl = document.getElementById('secrets-progress');
+
+        function getOrigin(el) {
+          const rect = el.getBoundingClientRect();
+          return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+        }
+
+        function markSecretFound(id, toastMsg) {
+          const wasNew = !foundSecrets.has(id);
+          foundSecrets.add(id);
+          const count = foundSecrets.size;
+          if (count >= TOTAL_SECRETS) {
+            secretsHintEl.textContent = `All ${TOTAL_SECRETS} autumn secrets discovered! Master Explorer!`;
+            if (wasNew) {
+              HolidayAudio.fanfare();
+              spawnGoldenLeafShower();
+              showToast('All 10 Secrets Found! Happy Thanksgiving from the Tokars!');
+              return;
+            }
+          } else {
+            secretsHintEl.textContent = `${count} of ${TOTAL_SECRETS} autumn secrets discovered`;
+          }
+          showToast(toastMsg);
+        }
+
+        // Secret #1: Acorn in Footer -> Golden Leaf Shower
+        document.getElementById('egg-acorn-btn').addEventListener('click', () => {
+          HolidayAudio.chime();
+          spawnGoldenLeafShower();
+          markSecretFound('acorn', 'Secret Found: Golden Autumn Leaf Shower!');
+        });
+
+        // Secret #2: Football Icon -> Stadium Cheer & Confetti Burst
+        document.getElementById('egg-football-btn').addEventListener('click', (e) => {
+          const { x, y } = getOrigin(e.currentTarget);
+          HolidayAudio.stadiumCheer();
+          spawnConfettiBurst(x, y);
+          markSecretFound('football', 'Touchdown! Game-day spirit unlocked!');
+        });
+
+        // Secret #4: Hero Harvest Crest -> Harp Arpeggio & Autumn Petal Burst
+        document.getElementById('egg-crest-btn').addEventListener('click', (e) => {
+          const { x, y } = getOrigin(e.currentTarget);
+          HolidayAudio.harp();
+          spawnSparkleRing(x, y, ['#C59B27', '#C85A17', '#6B1D2F', '#4A5D4E']);
+          markSecretFound('crest', 'Secret Found: Warm Harvest Blessing!');
+        });
+
+        // Secret #5: Divider Gold Star -> Thanksgiving Wish Sparkle
+        document.getElementById('egg-star-btn').addEventListener('click', (e) => {
+          const { x, y } = getOrigin(e.currentTarget);
+          HolidayAudio.wishSparkle();
+          spawnSparkleRing(x, y, ['#E2BE53', '#FFFDF9', '#C59B27']);
+          markSecretFound('star', 'Make a Thanksgiving wish under the harvest star!');
+        });
+
+        // Secret #6: Mashed Potatoes -> Extra Pat of Butter Melt
+        document.getElementById('egg-potatoes-btn').addEventListener('click', (e) => {
+          const { x, y } = getOrigin(e.currentTarget);
+          HolidayAudio.butterMelt();
+          spawnSparkleRing(x, y, ['#F3C14B', '#FAF0D7', '#FFFDF9']);
+          markSecretFound('potatoes', 'Jackie & Brandon approved: Extra butter added!');
+        });
+
+        // Secret #7: Popcorn Dessert -> Popping Popcorn Fountain
+        document.getElementById('egg-popcorn-btn').addEventListener('click', (e) => {
+          const { x, y } = getOrigin(e.currentTarget);
+          HolidayAudio.pop();
+          setTimeout(() => HolidayAudio.pop(), 90);
+          setTimeout(() => HolidayAudio.pop(), 180);
+          spawnPopcornBurst(x, y);
+          markSecretFound('popcorn', 'Pop! Pop! Popcorn Dessert is ready!');
+        });
+
+        // Secret #8: Pie & Green Beans -> Cinnamon & Whipped Cream Sparkle
+        document.getElementById('egg-pie-btn').addEventListener('click', (e) => {
+          const { x, y } = getOrigin(e.currentTarget);
+          HolidayAudio.chime();
+          spawnSparkleRing(x, y, ['#C85A17', '#FFFDF9', '#4A5D4E', '#DFA763']);
+          markSecretFound('pie', 'Joni’s Bakery Secret: Always save room for pie!');
+        });
+
+        // Secret #9: Cast-Iron Skillet Corn Dip -> Skillet Sizzle & Corn Sparkles
+        document.getElementById('egg-skillet-btn').addEventListener('click', (e) => {
+          const { x, y } = getOrigin(e.currentTarget);
+          HolidayAudio.sizzle();
+          spawnSparkleRing(x, y, ['#F2C14E', '#FFE380', '#C85A17']);
+          markSecretFound('skillet', 'Jason’s Corn Dip is sizzling hot for kickoff!');
+        });
+
+        // Secret #10: Winter & Christmas Beer Mug -> Clink & Rising Fizz Bubbles
+        document.getElementById('egg-beer-btn').addEventListener('click', (e) => {
+          const { x, y } = getOrigin(e.currentTarget);
+          HolidayAudio.clink();
+          spawnBubbles(x, y);
+          markSecretFound('beer', 'Cheers! Winter & Christmas beers are chilled!');
+        });
+
+        /* ----------------------------------------------------------------------
+           8. INTERACTIVE GRATITUDE WALL (localStorage — Starts Empty)
+           ---------------------------------------------------------------------- */
+        const STORAGE_KEY = 'tokar_thanksgiving_gratitude_v2';
+
+        function loadGratitudeEntries() {
+          try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return [];
+            const parsed = JSON.parse(raw);
+            if (Array.isArray(parsed)) return parsed;
+          } catch {
+            // Fall back cleanly if localStorage is restricted
+          }
+          return [];
+        }
+
+        function saveGratitudeEntries(entries) {
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+          } catch {
+            // Ignore storage quota errors gracefully
+          }
+        }
+
+        let gratitudeEntries = loadGratitudeEntries();
+        const gratitudeGrid = document.getElementById('gratitude-grid');
+        const gratitudeCount = document.getElementById('gratitude-count');
+        const gratitudeForm = document.getElementById('gratitude-form');
+        const gratitudeError = document.getElementById('gratitude-error');
+        const nameInput = document.getElementById('gratitude-name');
+        const msgInput = document.getElementById('gratitude-message');
+
+        function renderGratitudeBoard(newestId = null) {
+          gratitudeGrid.innerHTML = '';
+          gratitudeCount.textContent = `${gratitudeEntries.length} ${
+            gratitudeEntries.length === 1 ? 'entry' : 'entries'
+          }`;
+
+          if (gratitudeEntries.length === 0) {
+            const empty = document.createElement('div');
+            empty.className = 'gratitude-empty';
+            const title = document.createElement('p');
+            title.textContent = 'The Gratitude Board is waiting for its first note.';
+            const sub = document.createElement('span');
+            sub.textContent = 'Add your name and something you are thankful for to start the family keepsake!';
+            empty.appendChild(title);
+            empty.appendChild(sub);
+            gratitudeGrid.appendChild(empty);
+            return;
+          }
+
+          gratitudeEntries.forEach((entry) => {
+            const card = document.createElement('article');
+            card.className = 'keepsake-card' + (entry.id === newestId ? ' is-new' : '');
+
+            const quote = document.createElement('p');
+            quote.className = 'keepsake-quote';
+            quote.textContent = `“${entry.message}”`;
+
+            const footer = document.createElement('div');
+            footer.className = 'keepsake-footer';
+
+            const left = document.createElement('div');
+            const author = document.createElement('span');
+            author.className = 'keepsake-author';
+            author.textContent = entry.name;
+
+            const meta = document.createElement('span');
+            meta.className = 'keepsake-meta';
+            meta.textContent = ` · ${entry.dateLabel}`;
+
+            left.appendChild(author);
+            left.appendChild(meta);
+            footer.appendChild(left);
+
+            const delBtn = document.createElement('button');
+            delBtn.type = 'button';
+            delBtn.className = 'keepsake-remove';
+            delBtn.textContent = 'Remove';
+            delBtn.setAttribute('aria-label', `Remove note from ${entry.name}`);
+            delBtn.addEventListener('click', () => {
+              gratitudeEntries = gratitudeEntries.filter((item) => item.id !== entry.id);
+              saveGratitudeEntries(gratitudeEntries);
+              renderGratitudeBoard();
+            });
+            footer.appendChild(delBtn);
+
+            card.appendChild(quote);
+            card.appendChild(footer);
+            gratitudeGrid.appendChild(card);
+          });
+        }
+
+        gratitudeForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const name = nameInput.value.trim();
+          const message = msgInput.value.trim();
+
+          if (!name || !message) {
+            gratitudeError.textContent = 'Please enter both your name and what you are thankful for.';
+            return;
+          }
+          gratitudeError.textContent = '';
+
+          const newEntry = {
+            id: 'note-' + Date.now(),
+            name,
+            message,
+            dateLabel: 'Just now',
+            seeded: false,
+          };
+
+          gratitudeEntries = [newEntry, ...gratitudeEntries];
+          saveGratitudeEntries(gratitudeEntries);
+          renderGratitudeBoard(newEntry.id);
+
+          nameInput.value = '';
+          msgInput.value = '';
+          HolidayAudio.chime();
+          showToast(`Added ${name}'s gratitude note to the board!`);
+        });
+
+        renderGratitudeBoard();
+
+        /* ----------------------------------------------------------------------
+           9. SECRET MINI-GAME: THE GREAT TOKAR TURKEY CHALLENGE (HTML5 CANVAS)
+           ---------------------------------------------------------------------- */
+        const gameModal = document.getElementById('game-modal');
+        const canvas = document.getElementById('turkey-game-canvas');
+        const ctx = canvas.getContext('2d');
+        const stageMetaEl = document.getElementById('game-stage-meta');
+        const hudScoreEl = document.getElementById('game-hud-score');
+        const instructionEl = document.getElementById('game-instruction');
+        const toolButtonsEl = document.getElementById('game-tool-buttons');
+        const muteBtn = document.getElementById('game-mute-btn');
+        const closeGameBtn = document.getElementById('game-close-btn');
+
+        const GAME_W = 920;
+        const GAME_H = 575;
+
+        let rafId = null;
+        let lastFrameTime = 0;
+
+        // Clean Game State Machine
+        const game = {
+          state: 'TITLE', // 'TITLE' | 'STAGE_1_PREP' | 'STAGE_2_ROAST' | 'STAGE_3_CARVE' | 'VICTORY'
+          scores: { prep: 0, roast: 0, carve: 0 },
+          pointer: { x: GAME_W / 2, y: GAME_H / 2, down: false },
+          particles: [],
+
+          // Stage 1: Prep the Bird
+          prep: {
+            activeTool: 'butter',
+            progress: { butter: 0, salt: 0, herbs: 0, garlic: 0 },
+            flecks: [],
+            butterSpots: [],
+            handTarget: { x: 460, y: 290 },
+          },
+
+          // Stage 2: Roast to Perfection
+          roast: {
+            elapsed: 0,
+            duration: 18,
+            temp: 345, // Golden Zone: 325 - 375
+            tempDrift: 16,
+            moisture: 100,
+            basteFlash: 0,
+            goldenScoreAccum: 0,
+            lastSizzle: 0,
+          },
+
+          // Stage 3: Carve the Turkey
+          carve: {
+            currentCutIndex: 0,
+            cuts: [],
+            carvedSlices: [],
+            activeDragPoints: [],
+            cutAccuracySum: 0,
+          },
+        };
+
+        function setupHighDpiCanvas() {
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          canvas.width = GAME_W * dpr;
+          canvas.height = GAME_H * dpr;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+        setupHighDpiCanvas();
+
+        function totalScore() {
+          return Math.round(game.scores.prep + game.scores.roast + game.scores.carve);
+        }
+
+        function updateHudScore() {
+          hudScoreEl.textContent = `Score: ${totalScore()}`;
+        }
+
+        function resetGame() {
+          game.scores = { prep: 0, roast: 0, carve: 0 };
+          game.particles = [];
+          game.prep = {
+            activeTool: 'butter',
+            progress: { butter: 0, salt: 0, herbs: 0, garlic: 0 },
+            flecks: [],
+            butterSpots: [],
+            handTarget: { x: 460, y: 290 },
+          };
+          game.roast = {
+            elapsed: 0,
+            duration: 18,
+            temp: 348,
+            tempDrift: 18,
+            moisture: 100,
+            basteFlash: 0,
+            goldenScoreAccum: 0,
+            lastSizzle: 0,
+          };
+          game.carve = {
+            currentCutIndex: 0,
+            cuts: [
+              { label: 'Right Breast Slice', x1: 370, y1: 215, x2: 435, y2: 335, done: false },
+              { label: 'Left Breast Slice', x1: 495, y1: 210, x2: 550, y2: 330, done: false },
+              { label: 'Drumstick Joint', x1: 555, y1: 270, x2: 615, y2: 365, done: false },
+              { label: 'Wing & Platter Trim', x1: 315, y1: 265, x2: 365, y2: 355, done: false },
+            ],
+            carvedSlices: [],
+            activeDragPoints: [],
+            cutAccuracySum: 0,
+          };
+          updateHudScore();
+        }
+
+        function setStage(nextState) {
+          game.state = nextState;
+          toolButtonsEl.innerHTML = '';
+
+          if (nextState === 'TITLE') {
+            stageMetaEl.textContent = 'Welcome to the Tokar Kitchen';
+            instructionEl.textContent =
+              'Three culinary stages stand between you and Master Thanksgiving Chef status.';
+            const startBtn = createButton('Start Cooking', 'btn btn-gold', () => {
+              HolidayAudio.chime();
+              resetGame();
+              setStage('STAGE_1_PREP');
+            });
+            toolButtonsEl.appendChild(startBtn);
+          } else if (nextState === 'STAGE_1_PREP') {
+            stageMetaEl.textContent = 'Stage 1 of 3 · Prep the Bird';
+            instructionEl.textContent =
+              'Select an ingredient below, then rub or tap across the turkey until all 4 seasonings reach 100%!';
+            renderPrepToolbar();
+          } else if (nextState === 'STAGE_2_ROAST') {
+            stageMetaEl.textContent = 'Stage 2 of 3 · Roast to Perfection';
+            instructionEl.textContent =
+              'Keep the oven dial inside the Golden Zone (325–375°F) and baste periodically for crispy mahogany skin!';
+            renderRoastToolbar();
+          } else if (nextState === 'STAGE_3_CARVE') {
+            stageMetaEl.textContent = 'Stage 3 of 3 · Carve the Turkey';
+            instructionEl.textContent =
+              'Drag your carving knife smoothly along the glowing dotted guide lines to plate each slice.';
+            const hint = createButton('Reset Cut', 'tool-btn', () => {
+              game.carve.activeDragPoints = [];
+            });
+            toolButtonsEl.appendChild(hint);
+          } else if (nextState === 'VICTORY') {
+            stageMetaEl.textContent = 'Feast Complete · Master Scorecard';
+            instructionEl.textContent =
+              'Dinner is served! Share your kitchen score with the family or play again to beat it.';
+            HolidayAudio.fanfare();
+            const shareBtn = createButton('Copy Score', 'btn btn-outline', async () => {
+              const msg = `I earned ${totalScore()}/300 in The Great Tokar Turkey Challenge! (Prep: ${Math.round(
+                game.scores.prep
+              )}, Roast: ${Math.round(game.scores.roast)}, Carve: ${Math.round(game.scores.carve)})`;
+              try {
+                await navigator.clipboard.writeText(msg);
+                showToast('Chef scorecard copied for the family group chat!');
+              } catch {
+                showToast(msg);
+              }
+            });
+            const replayBtn = createButton('Play Again', 'btn btn-gold', () => {
+              HolidayAudio.chime();
+              resetGame();
+              setStage('STAGE_1_PREP');
+            });
+            toolButtonsEl.appendChild(shareBtn);
+            toolButtonsEl.appendChild(replayBtn);
+          }
+          updateHudScore();
+        }
+
+        function createButton(label, className, onClick) {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = className;
+          btn.textContent = label;
+          btn.addEventListener('click', onClick);
+          return btn;
+        }
+
+        function renderPrepToolbar() {
+          toolButtonsEl.innerHTML = '';
+          const tools = [
+            { id: 'butter', label: 'Herb Butter' },
+            { id: 'salt', label: 'Salt & Pepper' },
+            { id: 'herbs', label: 'Rosemary & Thyme' },
+            { id: 'garlic', label: 'Garlic & Citrus' },
+          ];
+          tools.forEach((t) => {
+            const pct = Math.min(100, Math.round(game.prep.progress[t.id]));
+            const btn = createButton(`${t.label} (${pct}%)`, 'tool-btn', () => {
+              game.prep.activeTool = t.id;
+              renderPrepToolbar();
+            });
+            if (game.prep.activeTool === t.id) btn.classList.add('active');
+            if (pct >= 100) btn.classList.add('done');
+            toolButtonsEl.appendChild(btn);
+          });
+        }
+
+        function renderRoastToolbar() {
+          toolButtonsEl.innerHTML = '';
+          const coolBtn = createButton('Vent Heat (-22°)', 'tool-btn', () => {
+            game.roast.temp = Math.max(240, game.roast.temp - 22);
+          });
+          const warmBtn = createButton('Boost Heat (+22°)', 'tool-btn', () => {
+            game.roast.temp = Math.min(460, game.roast.temp + 22);
+          });
+          const basteBtn = createButton('Baste Bird', 'btn btn-gold', () => {
+            triggerBaste();
+          });
+          toolButtonsEl.appendChild(coolBtn);
+          toolButtonsEl.appendChild(warmBtn);
+          toolButtonsEl.appendChild(basteBtn);
+        }
+
+        function triggerBaste() {
+          if (game.state !== 'STAGE_2_ROAST') return;
+          game.roast.moisture = Math.min(100, game.roast.moisture + 28);
+          game.roast.basteFlash = 1;
+          HolidayAudio.sizzle();
+          spawnGameSparkles(460, 260, '#F6C85F', 14);
+        }
+
+        function spawnGameSparkles(x, y, color, count = 10) {
+          for (let i = 0; i < count; i++) {
+            const ang = Math.random() * Math.PI * 2;
+            const spd = 1.2 + Math.random() * 3.4;
+            game.particles.push({
+              kind: 'sparkle',
+              x,
+              y,
+              vx: Math.cos(ang) * spd,
+              vy: Math.sin(ang) * spd - 1.2,
+              size: 2.5 + Math.random() * 3.5,
+              color,
+              life: 1,
+              decay: 0.028,
+            });
+          }
+        }
+
+        function spawnSteamParticle(x, y) {
+          game.particles.push({
+            kind: 'steam',
+            x: x + (Math.random() - 0.5) * 140,
+            y: y + (Math.random() - 0.5) * 20,
+            vx: (Math.random() - 0.5) * 0.45,
+            vy: -0.9 - Math.random() * 1.1,
+            size: 10 + Math.random() * 16,
+            color: '#FFFDF9',
+            life: 0.55,
+            decay: 0.008,
+          });
+        }
+
+        /* ----------------------------------------------------------------------
+           POINTER / TOUCH COORDINATE MAPPING & INTERACTIONS
+           ---------------------------------------------------------------------- */
+        function getCanvasCoords(clientX, clientY) {
+          const rect = canvas.getBoundingClientRect();
+          return {
+            x: ((clientX - rect.left) / rect.width) * GAME_W,
+            y: ((clientY - rect.top) / rect.height) * GAME_H,
+          };
+        }
+
+        function isInsideTurkey(x, y) {
+          const dx = (x - 460) / 165;
+          const dy = (y - 295) / 105;
+          return dx * dx + dy * dy <= 1.08;
+        }
+
+        function applySeasoningAt(x, y) {
+          if (game.state !== 'STAGE_1_PREP' || !isInsideTurkey(x, y)) return;
+          const tool = game.prep.activeTool;
+          game.prep.handTarget = { x, y };
+
+          if (game.prep.progress[tool] >= 100) {
+            // Automatically jump to next unfinished seasoning for effortless UX
+            const next = ['butter', 'salt', 'herbs', 'garlic'].find((k) => game.prep.progress[k] < 100);
+            if (next) {
+              game.prep.activeTool = next;
+              renderPrepToolbar();
+            }
+            return;
+          }
+
+          game.prep.progress[tool] = Math.min(100, game.prep.progress[tool] + 6.5);
+
+          if (tool === 'butter') {
+            game.prep.butterSpots.push({ x, y, r: 16 + Math.random() * 14 });
+          } else {
+            const palette =
+              tool === 'salt'
+                ? ['#FFFDF9', '#2B1F1D']
+                : tool === 'herbs'
+                ? ['#3D5A3E', '#5D7E52']
+                : ['#F2CA66', '#E88E38'];
+            for (let i = 0; i < 3; i++) {
+              game.prep.flecks.push({
+                x: x + (Math.random() - 0.5) * 28,
+                y: y + (Math.random() - 0.5) * 22,
+                r: tool === 'herbs' ? 3.4 : 2.1,
+                rot: Math.random() * Math.PI,
+                kind: tool,
+                color: palette[Math.floor(Math.random() * palette.length)],
+              });
+            }
+          }
+
+          if (Math.random() > 0.65) HolidayAudio.sprinkle();
+          spawnGameSparkles(x, y, '#E2BE53', 2);
+
+          const avgPct =
+            (game.prep.progress.butter +
+              game.prep.progress.salt +
+              game.prep.progress.herbs +
+              game.prep.progress.garlic) /
+            4;
+          game.scores.prep = avgPct;
+          updateHudScore();
+          renderPrepToolbar();
+
+          if (avgPct >= 100) {
+            HolidayAudio.chime();
+            spawnGameSparkles(460, 280, '#E2BE53', 28);
+            setTimeout(() => {
+              if (game.state === 'STAGE_1_PREP') setStage('STAGE_2_ROAST');
+            }, 650);
+          }
+        }
+
+        function distToSegment(px, py, x1, y1, x2, y2) {
+          const l2 = (x2 - x1) ** 2 + (y2 - y1) ** 2;
+          if (l2 === 0) return Math.hypot(px - x1, py - y1);
+          let t = ((px - x1) * (x2 - x1) + (py - y1) * (y2 - y1)) / l2;
+          t = Math.max(0, Math.min(1, t));
+          return Math.hypot(px - (x1 + t * (x2 - x1)), py - (y1 + t * (y2 - y1)));
+        }
+
+        function evaluateCarveStroke() {
+          if (game.state !== 'STAGE_3_CARVE') return;
+          const pts = game.carve.activeDragPoints;
+          if (pts.length < 4) {
+            game.carve.activeDragPoints = [];
+            return;
+          }
+
+          const cut = game.carve.cuts[game.carve.currentCutIndex];
+          if (!cut) return;
+
+          const start = pts[0];
+          const end = pts[pts.length - 1];
+          const strokeLen = Math.hypot(end.x - start.x, end.y - start.y);
+          const targetLen = Math.hypot(cut.x2 - cut.x1, cut.y2 - cut.y1);
+
+          // Check coverage of both endpoints & average distance to cut segment
+          let totalDist = 0;
+          for (const p of pts) {
+            totalDist += distToSegment(p.x, p.y, cut.x1, cut.y1, cut.x2, cut.y2);
+          }
+          const avgDist = totalDist / pts.length;
+
+          if (strokeLen >= targetLen * 0.45 && avgDist < 42) {
+            const accuracy = Math.max(0.55, Math.min(1, 1 - avgDist / 70));
+            cut.done = true;
+            game.carve.cutAccuracySum += accuracy * 25;
+            game.scores.carve = Math.round(game.carve.cutAccuracySum);
+            updateHudScore();
+
+            game.carve.carvedSlices.push({
+              index: game.carve.currentCutIndex,
+              x: 685 + (game.carve.currentCutIndex % 2) * 32,
+              y: 355 + Math.floor(game.carve.currentCutIndex / 2) * 26,
+            });
+
+            HolidayAudio.slice();
+            spawnGameSparkles((cut.x1 + cut.x2) / 2, (cut.y1 + cut.y2) / 2, '#FFFDF9', 18);
+            game.carve.currentCutIndex += 1;
+
+            if (game.carve.currentCutIndex >= game.carve.cuts.length) {
+              setTimeout(() => {
+                if (game.state === 'STAGE_3_CARVE') setStage('VICTORY');
+              }, 700);
+            }
+          }
+          game.carve.activeDragPoints = [];
+        }
+
+        canvas.addEventListener('pointerdown', (e) => {
+          const pos = getCanvasCoords(e.clientX, e.clientY);
+          game.pointer = { ...pos, down: true };
+          canvas.setPointerCapture(e.pointerId);
+
+          if (game.state === 'TITLE') {
+            if (pos.x >= 320 && pos.x <= 600 && pos.y >= 380 && pos.y <= 460) {
+              HolidayAudio.chime();
+              resetGame();
+              setStage('STAGE_1_PREP');
+            }
+          } else if (game.state === 'STAGE_1_PREP') {
+            applySeasoningAt(pos.x, pos.y);
+          } else if (game.state === 'STAGE_2_ROAST') {
+            if (isInsideTurkey(pos.x, pos.y)) triggerBaste();
+          } else if (game.state === 'STAGE_3_CARVE') {
+            game.carve.activeDragPoints = [pos];
+          }
+        });
+
+        canvas.addEventListener('pointermove', (e) => {
+          const pos = getCanvasCoords(e.clientX, e.clientY);
+          game.pointer.x = pos.x;
+          game.pointer.y = pos.y;
+
+          if (!game.pointer.down) return;
+          if (game.state === 'STAGE_1_PREP') {
+            applySeasoningAt(pos.x, pos.y);
+          } else if (game.state === 'STAGE_3_CARVE') {
+            game.carve.activeDragPoints.push(pos);
+          }
+        });
+
+        canvas.addEventListener('pointerup', () => {
+          game.pointer.down = false;
+          if (game.state === 'STAGE_3_CARVE') {
+            evaluateCarveStroke();
+          }
+        });
+
+        /* ----------------------------------------------------------------------
+           CANVAS ARTWORK & SHADER RENDERING
+           ---------------------------------------------------------------------- */
+        function lerpColor(hexA, hexB, t) {
+          const a = parseInt(hexA.slice(1), 16);
+          const b = parseInt(hexB.slice(1), 16);
+          const r = Math.round(((a >> 16) & 255) * (1 - t) + ((b >> 16) & 255) * t);
+          const g = Math.round(((a >> 8) & 255) * (1 - t) + ((b >> 8) & 255) * t);
+          const bl = Math.round((a & 255) * (1 - t) + (b & 255) * t);
+          return `rgb(${r}, ${g}, ${bl})`;
+        }
+
+        function drawDetailedTurkey(cx, cy, roastLevel, showHerbLayer, showGloss) {
+          ctx.save();
+          ctx.translate(cx, cy);
+
+          // Roast progression colors (0 = pale raw, 1 = crispy golden mahogany)
+          const lightTone = lerpColor('#F5D7C4', '#E58A3C', roastLevel);
+          const midTone = lerpColor('#E4B49A', '#B54A18', roastLevel);
+          const deepTone = lerpColor('#C88C71', '#5E1E08', roastLevel);
+
+          // Turkey body shadow
+          ctx.fillStyle = 'rgba(28, 16, 12, 0.25)';
+          ctx.beginPath();
+          ctx.ellipse(0, 72, 165, 32, 0, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Left Wing
+          ctx.fillStyle = midTone;
+          ctx.strokeStyle = deepTone;
+          ctx.lineWidth = 2.5;
+          ctx.beginPath();
+          ctx.ellipse(-122, 16, 46, 26, -0.35, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+
+          // Main Plump Breast & Body
+          const bodyGrad = ctx.createRadialGradient(-28, -32, 18, 0, 8, 175);
+          bodyGrad.addColorStop(0, lightTone);
+          bodyGrad.addColorStop(0.58, midTone);
+          bodyGrad.addColorStop(1, deepTone);
+
+          ctx.fillStyle = bodyGrad;
+          ctx.beginPath();
+          ctx.moveTo(-142, 18);
+          ctx.bezierCurveTo(-150, -78, -50, -108, 12, -102);
+          ctx.bezierCurveTo(95, -96, 148, -44, 138, 24);
+          ctx.bezierCurveTo(126, 72, -125, 75, -142, 18);
+          ctx.fill();
+          ctx.strokeStyle = deepTone;
+          ctx.lineWidth = 3;
+          ctx.stroke();
+
+          // Drumsticks (Right & Back)
+          ctx.save();
+          ctx.translate(105, -24);
+          ctx.rotate(-0.28);
+          const legGrad = ctx.createLinearGradient(-20, -25, 45, 25);
+          legGrad.addColorStop(0, lightTone);
+          legGrad.addColorStop(0.6, midTone);
+          legGrad.addColorStop(1, deepTone);
+          ctx.fillStyle = legGrad;
+          ctx.beginPath();
+          ctx.ellipse(0, 0, 58, 28, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+          // Bone tip + paper frill
+          ctx.fillStyle = '#FFFDF9';
+          ctx.beginPath();
+          ctx.roundRect(52, -7, 26, 14, 5);
+          ctx.fill();
+          ctx.beginPath();
+          ctx.arc(80, -4, 6, 0, Math.PI * 2);
+          ctx.arc(80, 4, 6, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+
+          // Butter / Pan-Juice Gloss Sheen
+          if (showGloss || roastLevel > 0.25) {
+            ctx.save();
+            ctx.globalAlpha = 0.28 + roastLevel * 0.25;
+            ctx.fillStyle = '#FFE4A8';
+            ctx.beginPath();
+            ctx.ellipse(-28, -46, 62, 20, -0.18, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.ellipse(25, -24, 34, 10, 0.12, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+          }
+
+          // Butter & Seasoning spots from Stage 1
+          if (showHerbLayer) {
+            for (const spot of game.prep.butterSpots) {
+              ctx.save();
+              ctx.globalAlpha = 0.26;
+              ctx.fillStyle = '#F7CA52';
+              ctx.beginPath();
+              ctx.arc(spot.x - cx, spot.y - cy, spot.r, 0, Math.PI * 2);
+              ctx.fill();
+              ctx.restore();
+            }
+            for (const f of game.prep.flecks) {
+              ctx.save();
+              ctx.translate(f.x - cx, f.y - cy);
+              ctx.rotate(f.rot);
+              ctx.fillStyle = f.color;
+              if (f.kind === 'herbs') {
+                ctx.beginPath();
+                ctx.ellipse(0, 0, f.r * 1.5, f.r * 0.6, 0, 0, Math.PI * 2);
+                ctx.fill();
+              } else {
+                ctx.beginPath();
+                ctx.arc(0, 0, f.r, 0, Math.PI * 2);
+                ctx.fill();
+              }
+              ctx.restore();
+            }
+          }
+
+          ctx.restore();
+        }
+
+        function drawKitchenBackground(warmOvenGlow = false) {
+          // Warm kitchen wall backdrop
+          const wallGrad = ctx.createLinearGradient(0, 0, 0, GAME_H);
+          wallGrad.addColorStop(0, warmOvenGlow ? '#3C2017' : '#F3ECE1');
+          wallGrad.addColorStop(0.65, warmOvenGlow ? '#592919' : '#E7DAC7');
+          wallGrad.addColorStop(1, '#9A6C42');
+          ctx.fillStyle = wallGrad;
+          ctx.fillRect(0, 0, GAME_W, GAME_H);
+
+          // Butcher block / Table surface
+          const woodGrad = ctx.createLinearGradient(0, 340, 0, GAME_H);
+          woodGrad.addColorStop(0, '#B98451');
+          woodGrad.addColorStop(1, '#7D4E28');
+          ctx.fillStyle = woodGrad;
+          ctx.fillRect(0, 340, GAME_W, GAME_H - 340);
+
+          ctx.strokeStyle = 'rgba(61, 34, 14, 0.25)';
+          ctx.lineWidth = 1.5;
+          for (let y = 365; y < GAME_H; y += 34) {
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(GAME_W, y);
+            ctx.stroke();
+          }
+        }
+
+        function drawChefHands(x, y, holdingItem) {
+          ctx.save();
+          ctx.translate(x, y);
+          // Forearm cuff & chef sleeve
+          ctx.fillStyle = '#FFFDF9';
+          ctx.strokeStyle = '#D9CBB8';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.roundRect(-24, 24, 48, 70, 10);
+          ctx.fill();
+          ctx.stroke();
+
+          // Warm illustrated hand
+          ctx.fillStyle = '#F2C29B';
+          ctx.strokeStyle = '#C98F68';
+          ctx.beginPath();
+          ctx.ellipse(0, 6, 20, 22, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+
+          if (holdingItem === 'butter') {
+            ctx.fillStyle = '#F7CA52';
+            ctx.fillRect(-14, -18, 28, 16);
+          } else if (holdingItem === 'herbs') {
+            ctx.strokeStyle = '#4A5D4E';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(-10, -2);
+            ctx.lineTo(12, -24);
+            ctx.stroke();
+          }
+          ctx.restore();
+        }
+
+        function renderTitleScreen() {
+          drawKitchenBackground(false);
+          // Ornate Platter
+          ctx.fillStyle = '#E6DFD3';
+          ctx.strokeStyle = '#C59B27';
+          ctx.lineWidth = 4;
+          ctx.beginPath();
+          ctx.ellipse(460, 330, 235, 65, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+
+          drawDetailedTurkey(460, 265, 0.92, false, true);
+
+          // Editorial Banner Box
+          ctx.fillStyle = 'rgba(43, 31, 29, 0.86)';
+          ctx.strokeStyle = '#C59B27';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.roundRect(210, 48, 500, 108, 14);
+          ctx.fill();
+          ctx.stroke();
+
+          ctx.fillStyle = '#FFFDF9';
+          ctx.font = '700 30px "Playfair Display", Georgia, serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('The Great Tokar Turkey Challenge', 460, 96);
+
+          ctx.fillStyle = '#F3D796';
+          ctx.font = '500 15px "Plus Jakarta Sans", sans-serif';
+          ctx.fillText('Stage 1: Season · Stage 2: Roast & Baste · Stage 3: Carve & Serve', 460, 130);
+
+          // Canvas Start CTA
+          const btnGrad = ctx.createLinearGradient(320, 390, 600, 450);
+          btnGrad.addColorStop(0, '#C59B27');
+          btnGrad.addColorStop(1, '#E2BE53');
+          ctx.fillStyle = btnGrad;
+          ctx.beginPath();
+          ctx.roundRect(330, 392, 260, 56, 10);
+          ctx.fill();
+
+          ctx.fillStyle = '#271C19';
+          ctx.font = '700 18px "Plus Jakarta Sans", sans-serif';
+          ctx.fillText('Enter the Kitchen', 460, 426);
+        }
+
+        function renderStage1Prep() {
+          drawKitchenBackground(false);
+          // Wooden Cutting Board
+          ctx.fillStyle = '#D9B17C';
+          ctx.strokeStyle = '#8F5D2E';
+          ctx.lineWidth = 4;
+          ctx.beginPath();
+          ctx.roundRect(195, 195, 530, 250, 24);
+          ctx.fill();
+          ctx.stroke();
+
+          const butterFactor = game.prep.progress.butter / 100;
+          drawDetailedTurkey(460, 295, 0.04, true, butterFactor > 0.2);
+
+          // Overall Prep Progress Bar
+          const avg =
+            (game.prep.progress.butter +
+              game.prep.progress.salt +
+              game.prep.progress.herbs +
+              game.prep.progress.garlic) /
+            4;
+
+          ctx.fillStyle = 'rgba(43, 31, 29, 0.82)';
+          ctx.beginPath();
+          ctx.roundRect(260, 32, 400, 48, 10);
+          ctx.fill();
+
+          ctx.fillStyle = '#FFFDF9';
+          ctx.font = '600 14px "Plus Jakarta Sans", sans-serif';
+          ctx.textAlign = 'left';
+          ctx.fillText(`Seasoning Readiness: ${Math.round(avg)}%`, 280, 54);
+
+          ctx.fillStyle = 'rgba(255,255,255,0.2)';
+          ctx.beginPath();
+          ctx.roundRect(280, 62, 360, 8, 4);
+          ctx.fill();
+
+          ctx.fillStyle = '#E2BE53';
+          ctx.beginPath();
+          ctx.roundRect(280, 62, (360 * avg) / 100, 8, 4);
+          ctx.fill();
+
+          // Animated Chef Hand following pointer when rubbing
+          if (game.pointer.down || avg < 100) {
+            drawChefHands(game.prep.handTarget.x + 24, game.prep.handTarget.y + 34, game.prep.activeTool);
+          }
+        }
+
+        function renderStage2Roast(dt) {
+          drawKitchenBackground(true);
+          const r = game.roast;
+          r.elapsed = Math.min(r.duration, r.elapsed + dt);
+          const progress = r.elapsed / r.duration;
+
+          // Drift temperature organically
+          r.tempDrift += (Math.random() - 0.5) * 45 * dt;
+          r.tempDrift = Math.max(-34, Math.min(34, r.tempDrift));
+          r.temp = Math.max(240, Math.min(460, r.temp + r.tempDrift * dt));
+          r.moisture = Math.max(20, r.moisture - dt * 5.2);
+          r.basteFlash = Math.max(0, r.basteFlash - dt * 2.2);
+
+          const inGoldenZone = r.temp >= 325 && r.temp <= 375;
+          if (inGoldenZone) {
+            r.goldenScoreAccum += (dt / r.duration) * 100 * (r.moisture > 45 ? 1 : 0.72);
+            game.scores.roast = Math.min(100, Math.round(r.goldenScoreAccum));
+            updateHudScore();
+          }
+
+          if (Math.random() < 0.25) {
+            spawnSteamParticle(460, 225);
+          }
+
+          // Copper Roasting Pan
+          ctx.fillStyle = '#9D4D27';
+          ctx.strokeStyle = '#E2BE53';
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.ellipse(460, 355, 225, 65, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+
+          drawDetailedTurkey(460, 290, 0.1 + progress * 0.9, true, r.moisture > 55 || r.basteFlash > 0);
+
+          // Baste golden drizzle flash
+          if (r.basteFlash > 0) {
+            ctx.save();
+            ctx.globalAlpha = r.basteFlash * 0.65;
+            ctx.strokeStyle = '#F7CA52';
+            ctx.lineWidth = 4;
+            for (let i = -2; i <= 2; i++) {
+              ctx.beginPath();
+              ctx.moveTo(460 + i * 24, 145);
+              ctx.lineTo(460 + i * 28, 255);
+              ctx.stroke();
+            }
+            ctx.restore();
+          }
+
+          // Oven Heat Gauge HUD on Canvas
+          ctx.fillStyle = 'rgba(30, 18, 15, 0.88)';
+          ctx.strokeStyle = '#C59B27';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.roundRect(140, 28, 640, 88, 12);
+          ctx.fill();
+          ctx.stroke();
+
+          ctx.fillStyle = '#FFFDF9';
+          ctx.font = '700 15px "Plus Jakarta Sans", sans-serif';
+          ctx.textAlign = 'left';
+          ctx.fillText(`Oven Temp: ${Math.round(r.temp)}°F`, 165, 56);
+          ctx.fillStyle = inGoldenZone ? '#8CD47E' : '#F29D52';
+          ctx.fillText(inGoldenZone ? 'GOLDEN ZONE — PERFECT!' : 'Adjust Heat to 325–375°F', 345, 56);
+
+          ctx.fillStyle = '#F3D796';
+          ctx.textAlign = 'right';
+          ctx.fillText(
+            `Time Left: ${Math.max(0, Math.ceil(r.duration - r.elapsed))}s · Moisture: ${Math.round(r.moisture)}%`,
+            755,
+            56
+          );
+
+          // Meter Bar
+          const barX = 165;
+          const barY = 74;
+          const barW = 590;
+          ctx.fillStyle = '#3E2A24';
+          ctx.beginPath();
+          ctx.roundRect(barX, barY, barW, 20, 8);
+          ctx.fill();
+
+          // Golden Zone Highlight (325 - 375 out of 240 - 460)
+          const minT = 240;
+          const maxT = 460;
+          const gStart = ((325 - minT) / (maxT - minT)) * barW;
+          const gEnd = ((375 - minT) / (maxT - minT)) * barW;
+          ctx.fillStyle = 'rgba(197, 155, 39, 0.55)';
+          ctx.fillRect(barX + gStart, barY, gEnd - gStart, 20);
+
+          // Needle
+          const needleX = barX + ((r.temp - minT) / (maxT - minT)) * barW;
+          ctx.fillStyle = '#FFFDF9';
+          ctx.beginPath();
+          ctx.roundRect(needleX - 4, barY - 4, 8, 28, 3);
+          ctx.fill();
+
+          if (r.elapsed >= r.duration) {
+            HolidayAudio.chime();
+            spawnGameSparkles(460, 270, '#E2BE53', 28);
+            setStage('STAGE_3_CARVE');
+          }
+        }
+
+        function renderStage3Carve() {
+          drawKitchenBackground(false);
+
+          // Ornate Silver Platter
+          const silverGrad = ctx.createLinearGradient(160, 290, 740, 420);
+          silverGrad.addColorStop(0, '#D4DCE0');
+          silverGrad.addColorStop(0.5, '#F5F7F8');
+          silverGrad.addColorStop(1, '#AEB8BE');
+          ctx.fillStyle = silverGrad;
+          ctx.strokeStyle = '#7E8A91';
+          ctx.lineWidth = 4;
+          ctx.beginPath();
+          ctx.ellipse(460, 355, 290, 82, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+
+          drawDetailedTurkey(430, 285, 1.0, true, true);
+
+          // Draw already-carved juicy slices on the right side of the platter
+          for (const sl of game.carve.carvedSlices) {
+            ctx.save();
+            ctx.translate(sl.x, sl.y);
+            ctx.fillStyle = '#F7E7CE';
+            ctx.strokeStyle = '#9C4214';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.ellipse(0, 0, 34, 16, -0.25, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+            ctx.restore();
+          }
+
+          // Active & Remaining Dotted Carving Lines
+          const activeCut = game.carve.cuts[game.carve.currentCutIndex];
+          if (activeCut) {
+            ctx.save();
+            ctx.strokeStyle = '#FFFDF9';
+            ctx.lineWidth = 5;
+            ctx.setLineDash([10, 8]);
+            ctx.beginPath();
+            ctx.moveTo(activeCut.x1, activeCut.y1);
+            ctx.lineTo(activeCut.x2, activeCut.y2);
+            ctx.stroke();
+
+            ctx.fillStyle = '#C85A17';
+            ctx.beginPath();
+            ctx.arc(activeCut.x1, activeCut.y1, 8, 0, Math.PI * 2);
+            ctx.arc(activeCut.x2, activeCut.y2, 8, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Label pill above cut
+            ctx.setLineDash([]);
+            ctx.fillStyle = 'rgba(43, 31, 29, 0.85)';
+            ctx.beginPath();
+            ctx.roundRect(300, 34, 320, 44, 10);
+            ctx.fill();
+            ctx.fillStyle = '#F3D796';
+            ctx.font = '700 15px "Plus Jakarta Sans", sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(
+              `Cut ${game.carve.currentCutIndex + 1} of 4: ${activeCut.label}`,
+              460,
+              61
+            );
+            ctx.restore();
+          }
+
+          // Active player drag trail
+          const pts = game.carve.activeDragPoints;
+          if (pts.length > 1) {
+            ctx.save();
+            ctx.strokeStyle = '#E2BE53';
+            ctx.lineWidth = 4;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(pts[0].x, pts[0].y);
+            for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
+            ctx.stroke();
+            ctx.restore();
+          }
+
+          // Gleaming Carving Knife following pointer
+          ctx.save();
+          ctx.translate(game.pointer.x, game.pointer.y);
+          ctx.rotate(-0.55);
+          ctx.fillStyle = '#E5ECEF';
+          ctx.strokeStyle = '#73828A';
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(68, -8);
+          ctx.quadraticCurveTo(80, 0, 68, 6);
+          ctx.lineTo(0, 8);
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+          ctx.fillStyle = '#4A2B18';
+          ctx.beginPath();
+          ctx.roundRect(-34, -2, 34, 12, 4);
+          ctx.fill();
+          ctx.restore();
+        }
+
+        function renderVictoryScreen() {
+          drawKitchenBackground(false);
+          const total = totalScore();
+          const rank =
+            total >= 255
+              ? 'Master Thanksgiving Chef'
+              : total >= 195
+              ? 'Tokar Head Sous Chef'
+              : 'Honorary Kitchen Helper';
+
+          // Victory Archival Card on Canvas
+          ctx.fillStyle = '#FFFDF9';
+          ctx.strokeStyle = '#C59B27';
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.roundRect(150, 56, 620, 455, 18);
+          ctx.fill();
+          ctx.stroke();
+
+          ctx.fillStyle = '#C85A17';
+          ctx.font = '700 13px "Plus Jakarta Sans", sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('OFFICIAL TOKAR KITCHEN SCORECARD', 460, 102);
+
+          ctx.fillStyle = '#6B1D2F';
+          ctx.font = '700 34px "Playfair Display", Georgia, serif';
+          ctx.fillText(rank, 460, 146);
+
+          ctx.fillStyle = '#271C19';
+          ctx.font = '700 54px "JetBrains Mono", monospace';
+          ctx.fillText(`${total} / 300`, 460, 222);
+
+          // Stage Breakdown Bars
+          const rows = [
+            { label: 'Stage 1 · Seasoning & Prep', val: Math.round(game.scores.prep) },
+            { label: 'Stage 2 · Golden Oven Roast', val: Math.round(game.scores.roast) },
+            { label: 'Stage 3 · Precision Carving', val: Math.round(game.scores.carve) },
+          ];
+          rows.forEach((row, idx) => {
+            const y = 278 + idx * 64;
+            ctx.fillStyle = '#5C4943';
+            ctx.font = '600 15px "Plus Jakarta Sans", sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText(row.label, 220, y);
+
+            ctx.textAlign = 'right';
+            ctx.fillStyle = '#6B1D2F';
+            ctx.fillText(`${row.val} / 100`, 700, y);
+
+            ctx.fillStyle = '#EDE4D5';
+            ctx.beginPath();
+            ctx.roundRect(220, y + 10, 480, 12, 6);
+            ctx.fill();
+
+            ctx.fillStyle = '#C59B27';
+            ctx.beginPath();
+            ctx.roundRect(220, y + 10, (480 * Math.min(100, row.val)) / 100, 12, 6);
+            ctx.fill();
+          });
+
+          ctx.fillStyle = '#4A5D4E';
+          ctx.font = 'italic 16px "Playfair Display", Georgia, serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('See you Saturday, November 28th at 3:00 PM!', 460, 485);
+        }
+
+        function updateAndDrawParticles(dt) {
+          game.particles = game.particles.filter((p) => p.life > 0);
+          for (const p of game.particles) {
+            p.x += p.vx * (dt * 60);
+            p.y += p.vy * (dt * 60);
+            p.life -= p.decay * (dt * 60);
+
+            ctx.save();
+            ctx.globalAlpha = Math.max(0, p.life);
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+          }
+        }
+
+        function gameLoop(timestamp) {
+          if (!gameModal.classList.contains('open')) {
+            rafId = null;
+            return;
+          }
+          const dt = lastFrameTime ? Math.min(0.05, (timestamp - lastFrameTime) / 1000) : 0.016;
+          lastFrameTime = timestamp;
+
+          ctx.clearRect(0, 0, GAME_W, GAME_H);
+
+          if (game.state === 'TITLE') renderTitleScreen();
+          else if (game.state === 'STAGE_1_PREP') renderStage1Prep();
+          else if (game.state === 'STAGE_2_ROAST') renderStage2Roast(dt);
+          else if (game.state === 'STAGE_3_CARVE') renderStage3Carve();
+          else if (game.state === 'VICTORY') renderVictoryScreen();
+
+          updateAndDrawParticles(dt);
+          rafId = requestAnimationFrame(gameLoop);
+        }
+
+        function openTurkeyGame() {
+          gameModal.classList.add('open');
+          document.body.style.overflow = 'hidden';
+          resetGame();
+          setStage('TITLE');
+          markSecretFound('chef', 'Secret Kitchen Unlocked: The Great Tokar Turkey Challenge!');
+          lastFrameTime = 0;
+          if (!rafId) rafId = requestAnimationFrame(gameLoop);
+        }
+
+        function closeTurkeyGame() {
+          gameModal.classList.remove('open');
+          document.body.style.overflow = '';
+          if (rafId) {
+            cancelAnimationFrame(rafId);
+            rafId = null;
+          }
+        }
+
+        document.querySelectorAll('.launch-game-btn').forEach((btn) => {
+          btn.addEventListener('click', openTurkeyGame);
+        });
+
+        closeGameBtn.addEventListener('click', closeTurkeyGame);
+        gameModal.addEventListener('click', (e) => {
+          if (e.target === gameModal) closeTurkeyGame();
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && gameModal.classList.contains('open')) {
+            closeTurkeyGame();
+          }
+        });
+
+        muteBtn.addEventListener('click', () => {
+          const isMuted = HolidayAudio.toggleMute();
+          muteBtn.textContent = isMuted ? 'Muted' : 'Sound On';
+          muteBtn.setAttribute('aria-pressed', String(isMuted));
+        });
+      })();
+    </script>
+  </body>
+</html>
