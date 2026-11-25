@@ -3007,21 +3007,35 @@
 
         window.addEventListener('tokar-gratitude-ready', syncFromBridge);
 
+        function waitForGratitudeAPI(timeoutMs = 5000) {
+          if (window.TokarGratitudeAPI) return Promise.resolve(window.TokarGratitudeAPI);
+          return new Promise((resolve, reject) => {
+            const timer = setTimeout(() => {
+              window.removeEventListener('tokar-gratitude-ready', onReady);
+              reject(new Error('Shared board connection timed out.'));
+            }, timeoutMs);
+            function onReady() {
+              if (!window.TokarGratitudeAPI) return;
+              clearTimeout(timer);
+              window.removeEventListener('tokar-gratitude-ready', onReady);
+              resolve(window.TokarGratitudeAPI);
+            }
+            window.addEventListener('tokar-gratitude-ready', onReady);
+          });
+        }
+
         hostManageBtn.addEventListener('click', async () => {
-          if (!window.TokarGratitudeAPI) {
-            showToast('Still connecting to the shared board...');
-            return;
-          }
           try {
+            const api = await waitForGratitudeAPI();
             if (isHostAdmin) {
-              await window.TokarGratitudeAPI.signOutHost();
+              await api.signOutHost();
               showToast('Signed out of host moderation.');
             } else {
-              const authState = await window.TokarGratitudeAPI.signInHost();
+              const authState = await api.signInHost();
               if (authState.isHostAdmin) {
                 showToast('Host moderation enabled.');
               } else {
-                await window.TokarGratitudeAPI.signOutHost();
+                await api.signOutHost();
                 showToast('Only the event host account can moderate shared notes.');
               }
             }
@@ -3039,10 +3053,6 @@
             gratitudeError.textContent = 'Please enter both your name and what you are thankful for.';
             return;
           }
-          if (!window.TokarGratitudeAPI) {
-            gratitudeError.textContent = 'Connecting to the shared board—please try again in a moment.';
-            return;
-          }
 
           gratitudeError.textContent = '';
           gratitudeSubmitBtn.disabled = true;
@@ -3050,7 +3060,8 @@
           gratitudeSubmitBtn.textContent = 'Posting...';
 
           try {
-            lastCreatedNoteId = await window.TokarGratitudeAPI.addNote(name, message);
+            const api = await waitForGratitudeAPI();
+            lastCreatedNoteId = await api.addNote(name, message);
             nameInput.value = '';
             msgInput.value = '';
             HolidayAudio.chime();
@@ -5161,5 +5172,140 @@
       })();
     </script>
     <script type="module" src="/src/main.tsx"></script>
+    <script type="module">
+      // Standalone static-host fallback (e.g., if raw index.html is hosted directly on GitHub Pages without Vite build)
+      (async () => {
+        await new Promise((r) => setTimeout(r, 150));
+        if (window.TokarGratitudeAPI) return;
+
+        const firebaseConfig = {
+          projectId: 'gen-lang-client-0464258796',
+          appId: '1:654105771739:web:484c867282cbf46e2216fe',
+          apiKey: 'AIzaSyB1Aq_-zaEikBLh3MsRlAttNr9fl445XxM',
+          authDomain: 'gen-lang-client-0464258796.firebaseapp.com',
+          firestoreDatabaseId: 'ai-studio-thanksgivingatth-5c8f9388-58ca-4bc9-89a0-02e789855057',
+          storageBucket: 'gen-lang-client-0464258796.firebasestorage.app',
+          messagingSenderId: '654105771739',
+        };
+
+        try {
+          const cdnBase = 'https://www.gstatic.com/firebasejs/13.4.0';
+          const [{ initializeApp }, firestoreMod, authMod] = await Promise.all([
+            import(/* @vite-ignore */ `${cdnBase}/firebase-app.js`),
+            import(/* @vite-ignore */ `${cdnBase}/firebase-firestore.js`),
+            import(/* @vite-ignore */ `${cdnBase}/firebase-auth.js`),
+          ]);
+
+          if (window.TokarGratitudeAPI) return;
+
+          const app = initializeApp(firebaseConfig);
+          const db = firestoreMod.getFirestore(app, firebaseConfig.firestoreDatabaseId);
+          const auth = authMod.getAuth(app);
+          const googleProvider = new authMod.GoogleAuthProvider();
+          const HOST_EMAIL = 'c_tokar@chuh.org';
+          const COLLECTION = 'gratitude_notes';
+
+          let currentNotes = [];
+          let notesLoaded = false;
+          let currentAuth = { uid: null, email: null, isHostAdmin: false };
+          let currentError = null;
+
+          function formatDateLabel(ms) {
+            if (!Number.isFinite(ms) || ms <= 0) return 'Just now';
+            const diffSec = Math.max(0, Math.floor((Date.now() - ms) / 1000));
+            if (diffSec < 60) return 'Just now';
+            const diffMin = Math.floor(diffSec / 60);
+            if (diffMin < 60) return `${diffMin}m ago`;
+            const diffHours = Math.floor(diffMin / 60);
+            if (diffHours < 24) return `${diffHours}h ago`;
+            return new Date(ms).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+          }
+
+          window.TokarGratitudeAPI = {
+            async addNote(rawName, rawMessage) {
+              const name = String(rawName || '').trim().slice(0, 48);
+              const message = String(rawMessage || '').trim().slice(0, 240);
+              if (!name || !message) throw new Error('Name and message required.');
+              const docRef = await firestoreMod.addDoc(firestoreMod.collection(db, COLLECTION), {
+                name,
+                message,
+                createdAt: firestoreMod.serverTimestamp(),
+              });
+              return docRef.id;
+            },
+            async deleteNote(noteId) {
+              await firestoreMod.deleteDoc(firestoreMod.doc(db, COLLECTION, noteId));
+            },
+            async signInHost() {
+              const cred = await authMod.signInWithPopup(auth, googleProvider);
+              const u = cred.user;
+              return {
+                uid: u?.uid ?? null,
+                email: u?.email ?? null,
+                isHostAdmin: Boolean(u && u.email === HOST_EMAIL && u.emailVerified),
+              };
+            },
+            async signOutHost() {
+              await authMod.signOut(auth);
+            },
+            getState() {
+              return {
+                notes: currentNotes,
+                loaded: notesLoaded,
+                auth: currentAuth,
+                errorMessage: currentError,
+              };
+            },
+          };
+
+          const q = firestoreMod.query(
+            firestoreMod.collection(db, COLLECTION),
+            firestoreMod.orderBy('createdAt', 'desc'),
+            firestoreMod.limit(100),
+          );
+
+          firestoreMod.onSnapshot(
+            q,
+            (snapshot) => {
+              currentNotes = snapshot.docs.map((docSnap) => {
+                const d = docSnap.data({ serverTimestamps: 'estimate' });
+                const ms =
+                  d.createdAt && typeof d.createdAt.toMillis === 'function'
+                    ? d.createdAt.toMillis()
+                    : Date.now();
+                return {
+                  id: docSnap.id,
+                  name: typeof d.name === 'string' ? d.name.slice(0, 48) : 'Family Guest',
+                  message: typeof d.message === 'string' ? d.message.slice(0, 240) : '',
+                  dateLabel: formatDateLabel(ms),
+                  createdAtMs: ms,
+                };
+              });
+              notesLoaded = true;
+              currentError = null;
+              window.TokarGratitudeUI?.onNotesUpdated?.(currentNotes, true);
+            },
+            () => {
+              notesLoaded = true;
+              currentError = 'Unable to load shared gratitude notes right now.';
+              window.TokarGratitudeUI?.onBoardError?.(currentError);
+            },
+          );
+
+          authMod.onAuthStateChanged(auth, (u) => {
+            currentAuth = {
+              uid: u?.uid ?? null,
+              email: u?.email ?? null,
+              isHostAdmin: Boolean(u && u.email === HOST_EMAIL && u.emailVerified),
+            };
+            window.TokarGratitudeUI?.onAuthUpdated?.(currentAuth);
+          });
+
+          window.dispatchEvent(new CustomEvent('tokar-gratitude-ready'));
+        } catch (err) {
+          console.error('Firebase fallback initialization failed:', err);
+        }
+      })();
+    </script>
   </body>
 </html>
