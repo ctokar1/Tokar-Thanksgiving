@@ -1289,6 +1289,149 @@
         color: var(--ink-muted);
       }
 
+      /* Replay Finale Montage Button in Footer */
+      .replay-montage-btn {
+        display: none;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.42rem 0.85rem;
+        min-height: 36px;
+        border-radius: var(--radius-sm);
+        background: linear-gradient(135deg, #c59b27, #b08519);
+        color: #1f140d;
+        border: 1px solid #a67d14;
+        font-size: 0.82rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition:
+          transform 180ms var(--ease-out-expo),
+          filter 180ms var(--ease-out-expo);
+      }
+
+      .replay-montage-btn.visible {
+        display: inline-flex;
+      }
+
+      .replay-montage-btn:hover {
+        transform: translateY(-1px);
+        filter: brightness(1.07);
+      }
+
+      /* ==========================================================================
+         14. SECRET COZY THANKSGIVING MONTAGE MODAL
+         ========================================================================== */
+      .montage-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 95;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        background: rgba(24, 14, 12, 0.86);
+        backdrop-filter: blur(8px);
+      }
+
+      .montage-modal.open {
+        display: flex;
+      }
+
+      .montage-shell {
+        width: 100%;
+        max-width: 960px;
+        max-height: 95dvh;
+        overflow-y: auto;
+        background: #231613;
+        border: 1.5px solid var(--gold);
+        border-radius: var(--radius-lg);
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .montage-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.8rem 1.25rem;
+        background: var(--burgundy);
+        color: #fffaf2;
+        border-bottom: 1px solid rgba(197, 155, 39, 0.45);
+      }
+
+      .montage-title-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 0.1rem;
+      }
+
+      .montage-title-wrap h2 {
+        font-family: var(--font-display);
+        font-size: 1.15rem;
+        margin: 0;
+        color: #fffaf2;
+      }
+
+      .montage-chapter-label {
+        font-size: 0.78rem;
+        color: #f3d796;
+        font-weight: 500;
+      }
+
+      .montage-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+
+      .montage-stage {
+        position: relative;
+        width: 100%;
+        background: #1a100e;
+      }
+
+      #montage-canvas {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+      }
+
+      .montage-progress-track {
+        height: 4px;
+        width: 100%;
+        background: rgba(255, 250, 242, 0.12);
+      }
+
+      .montage-progress-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #c85a17, #e2be53);
+        transition: width 80ms linear;
+      }
+
+      .montage-caption-bar {
+        padding: 0.9rem 1.35rem;
+        background: var(--bg-parchment);
+        color: var(--ink-primary);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+        border-top: 1px solid var(--border-gold);
+      }
+
+      .montage-caption {
+        font-family: var(--font-display);
+        font-style: italic;
+        font-size: 1rem;
+        color: var(--burgundy);
+        margin: 0;
+        flex: 1 1 280px;
+      }
+
       @media (max-width: 680px) {
         .container {
           padding: 0 1rem;
@@ -1445,6 +1588,27 @@
           padding: 0.4rem 0.7rem;
           font-size: 0.82rem;
           flex: 1 1 auto;
+        }
+        .montage-modal {
+          padding: 0.45rem;
+        }
+        .montage-topbar {
+          padding: 0.65rem 0.85rem;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+        .montage-title-wrap h2 {
+          font-size: 1rem;
+        }
+        .montage-actions {
+          width: 100%;
+          justify-content: flex-end;
+        }
+        .montage-caption-bar {
+          padding: 0.75rem 0.95rem;
+        }
+        .montage-caption {
+          font-size: 0.9rem;
         }
       }
 
@@ -1974,6 +2138,9 @@
 
         <div class="footer-secrets-hint">
           <span id="secrets-progress">10 autumn secrets hidden around this invitation</span>
+          <button type="button" id="replay-montage-btn" class="replay-montage-btn">
+            Watch Finale Montage
+          </button>
         </div>
       </div>
     </footer>
@@ -2040,11 +2207,62 @@
     </div>
 
     <!-- ========================================================================
+         SECRET REWARD MODAL: COZY THANKSGIVING ANIMATION MONTAGE
+         ======================================================================== -->
+    <div
+      id="montage-modal"
+      class="montage-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="montage-modal-title"
+    >
+      <div class="montage-shell">
+        <div class="montage-topbar">
+          <div class="montage-title-wrap">
+            <h2 id="montage-modal-title">A Cozy Tokar Thanksgiving</h2>
+            <span id="montage-chapter-label" class="montage-chapter-label">Secret Explorer Finale</span>
+          </div>
+
+          <div class="montage-actions">
+            <button type="button" id="montage-replay-btn" class="game-icon-btn">Replay</button>
+            <button type="button" id="montage-mute-btn" class="game-icon-btn" aria-pressed="false">Sound On</button>
+            <button type="button" id="montage-close-btn" class="game-icon-btn">Return to Invite</button>
+          </div>
+        </div>
+
+        <div class="montage-stage">
+          <canvas id="montage-canvas" width="960" height="540"></canvas>
+          <div class="montage-progress-track">
+            <div id="montage-progress-fill" class="montage-progress-fill"></div>
+          </div>
+        </div>
+
+        <div class="montage-caption-bar">
+          <p id="montage-caption" class="montage-caption">
+            Crisp autumn leaves swirl across parchment, revealing the warmth of Thanksgiving Day...
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================
          VANILLA JAVASCRIPT: AMBIENT LEAVES, AUDIO FX, GRATITUDE WALL & CANVAS GAME
          ======================================================================== -->
     <script>
       (() => {
         'use strict';
+
+        if (typeof CanvasRenderingContext2D !== 'undefined' && !CanvasRenderingContext2D.prototype.roundRect) {
+          CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, radii) {
+            const r = Math.min(Array.isArray(radii) ? radii[0] : radii || 0, Math.abs(w) / 2, Math.abs(h) / 2);
+            this.moveTo(x + r, y);
+            this.arcTo(x + w, y, x + w, y + h, r);
+            this.arcTo(x + w, y + h, x, y + h, r);
+            this.arcTo(x, y + h, x, y, r);
+            this.arcTo(x, y, x + w, y, r);
+            this.closePath();
+          };
+        }
 
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -2499,6 +2717,9 @@
         const TOTAL_SECRETS = 10;
         const foundSecrets = new Set();
         const secretsHintEl = document.getElementById('secrets-progress');
+        const replayMontageFooterBtn = document.getElementById('replay-montage-btn');
+        let pendingFinaleMontage = false;
+        let finaleLaunchedOnce = false;
 
         function getOrigin(el) {
           const rect = el.getBoundingClientRect();
@@ -2510,11 +2731,20 @@
           foundSecrets.add(id);
           const count = foundSecrets.size;
           if (count >= TOTAL_SECRETS) {
-            secretsHintEl.textContent = `All ${TOTAL_SECRETS} autumn secrets discovered! Master Explorer!`;
-            if (wasNew) {
+            secretsHintEl.textContent = `All ${TOTAL_SECRETS} autumn secrets discovered!`;
+            replayMontageFooterBtn.classList.add('visible');
+            if (wasNew && !finaleLaunchedOnce) {
               HolidayAudio.fanfare();
               spawnGoldenLeafShower();
-              showToast('All 10 Secrets Found! Happy Thanksgiving from the Tokars!');
+              if (gameModal.classList.contains('open')) {
+                pendingFinaleMontage = true;
+                showToast('All 10 Secrets Found! Close the kitchen to watch your Grand Finale!');
+              } else {
+                showToast('All 10 Secrets Found! Launching your Cozy Thanksgiving Finale...');
+                setTimeout(() => {
+                  if (!finaleLaunchedOnce) openMontage();
+                }, 950);
+              }
               return;
             }
           } else {
@@ -3751,6 +3981,10 @@
             cancelAnimationFrame(rafId);
             rafId = null;
           }
+          if (pendingFinaleMontage) {
+            pendingFinaleMontage = false;
+            setTimeout(() => openMontage(), 450);
+          }
         }
 
         document.querySelectorAll('.launch-game-btn').forEach((btn) => {
@@ -3763,15 +3997,1051 @@
         });
 
         document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' && gameModal.classList.contains('open')) {
-            closeTurkeyGame();
+          if (e.key === 'Escape') {
+            if (montageModal.classList.contains('open')) closeMontage();
+            else if (gameModal.classList.contains('open')) closeTurkeyGame();
           }
         });
 
         muteBtn.addEventListener('click', () => {
           const isMuted = HolidayAudio.toggleMute();
+          syncMuteButtons(isMuted);
+        });
+
+        /* ----------------------------------------------------------------------
+           10. SECRET FINALE: COZY THANKSGIVING ANIMATION MONTAGE
+           ---------------------------------------------------------------------- */
+        const montageModal = document.getElementById('montage-modal');
+        const mCanvas = document.getElementById('montage-canvas');
+        const mCtx = mCanvas.getContext('2d');
+        const mChapterEl = document.getElementById('montage-chapter-label');
+        const mCaptionEl = document.getElementById('montage-caption');
+        const mProgressEl = document.getElementById('montage-progress-fill');
+        const mReplayBtn = document.getElementById('montage-replay-btn');
+        const mMuteBtn = document.getElementById('montage-mute-btn');
+        const mCloseBtn = document.getElementById('montage-close-btn');
+
+        const MW = 960;
+        const MH = 540;
+        const MONTAGE_DURATION = 26.0; // Total choreography seconds before looping finale ambient state
+
+        let montageRaf = null;
+        let montageElapsed = 0;
+        let montageLastTs = 0;
+        let lastAudioCue = -1;
+
+        function syncMuteButtons(isMuted) {
           muteBtn.textContent = isMuted ? 'Muted' : 'Sound On';
           muteBtn.setAttribute('aria-pressed', String(isMuted));
+          mMuteBtn.textContent = isMuted ? 'Muted' : 'Sound On';
+          mMuteBtn.setAttribute('aria-pressed', String(isMuted));
+        }
+
+        function setupMontageCanvas() {
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          mCanvas.width = MW * dpr;
+          mCanvas.height = MH * dpr;
+          mCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+        setupMontageCanvas();
+
+        const easeInOut = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+        const easeOutBack = (t) => {
+          const c1 = 1.70158;
+          const c3 = c1 + 1;
+          return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+        };
+        const clamp01 = (v) => Math.max(0, Math.min(1, v));
+
+        // Pre-seeded swirl leaves for Montage Opening & Transition
+        const mSwirlLeaves = Array.from({ length: 48 }, (_, i) => ({
+          side: i % 2 === 0 ? -1 : 1,
+          x0: ((i * 73) % MW),
+          y0: ((i * 137) % MH),
+          size: 11 + (i % 5) * 4,
+          rot0: (i * 0.7) % (Math.PI * 2),
+          color: ['#C85A17', '#6B1D2F', '#C59B27', '#B7471C'][i % 4],
+        }));
+
+        // Lantern notes for Chapter 4 Finale (includes any real notes on the Gratitude Wall!)
+        function getLanternLabels() {
+          const custom = gratitudeEntries.slice(0, 4).map((e) => e.name);
+          const fallbacks = ['Family', 'Laughter', 'Traditions', 'Warmth', 'Gratitude', 'Home'];
+          return [...custom, ...fallbacks].slice(0, 6);
+        }
+
+        function drawMapleLeaf(c, size, color) {
+          c.fillStyle = color;
+          c.beginPath();
+          c.moveTo(0, -size);
+          c.lineTo(size * 0.25, -size * 0.35);
+          c.lineTo(size * 0.88, -size * 0.45);
+          c.lineTo(size * 0.45, size * 0.05);
+          c.lineTo(size * 0.75, size * 0.48);
+          c.lineTo(size * 0.15, size * 0.38);
+          c.lineTo(0, size * 0.85);
+          c.lineTo(-size * 0.15, size * 0.38);
+          c.lineTo(-size * 0.75, size * 0.48);
+          c.lineTo(-size * 0.45, size * 0.05);
+          c.lineTo(-size * 0.88, -size * 0.45);
+          c.lineTo(-size * 0.25, -size * 0.35);
+          c.closePath();
+          c.fill();
+        }
+
+        function drawCuteTurkey(c, cx, cy, scale, time, puffSteam) {
+          c.save();
+          c.translate(cx, cy);
+          c.scale(scale, scale);
+
+          // Platter
+          c.fillStyle = '#EAE0D0';
+          c.strokeStyle = '#C59B27';
+          c.lineWidth = 3;
+          c.beginPath();
+          c.ellipse(0, 48, 125, 32, 0, 0, Math.PI * 2);
+          c.fill();
+          c.stroke();
+
+          // Happy gentle breathing squash/stretch
+          const bob = Math.sin(time * 4) * 2.5;
+          c.translate(0, bob);
+
+          // Plump Golden-Brown Body
+          const grad = c.createRadialGradient(-18, -16, 12, 0, 6, 110);
+          grad.addColorStop(0, '#F0A44E');
+          grad.addColorStop(0.6, '#BD511A');
+          grad.addColorStop(1, '#6C2209');
+          c.fillStyle = grad;
+          c.strokeStyle = '#571A06';
+          c.lineWidth = 2.5;
+          c.beginPath();
+          c.ellipse(0, 8, 86, 56, 0, 0, Math.PI * 2);
+          c.fill();
+          c.stroke();
+
+          // Cute Drumstick with white frill
+          c.save();
+          c.translate(64, -12);
+          c.rotate(-0.35);
+          c.fillStyle = '#B54A18';
+          c.beginPath();
+          c.ellipse(0, 0, 34, 17, 0, 0, Math.PI * 2);
+          c.fill();
+          c.stroke();
+          c.fillStyle = '#FFFDF9';
+          c.beginPath();
+          c.roundRect(30, -5, 16, 10, 4);
+          c.fill();
+          c.restore();
+
+          // Glossy highlight & herb flecks
+          c.fillStyle = 'rgba(255, 236, 185, 0.52)';
+          c.beginPath();
+          c.ellipse(-22, -20, 36, 12, -0.18, 0, Math.PI * 2);
+          c.fill();
+          c.fillStyle = '#4A5D4E';
+          [[-30, -2], [-10, -14], [14, -8], [26, 6], [-18, 14]].forEach(([hx, hy]) => {
+            c.beginPath();
+            c.arc(hx, hy, 2.2, 0, Math.PI * 2);
+            c.fill();
+          });
+
+          // Happy cartoon steam poofs
+          if (puffSteam) {
+            for (let i = 0; i < 3; i++) {
+              const phase = (time * 1.1 + i * 0.33) % 1;
+              const sy = -52 - phase * 68;
+              const sx = Math.sin(time * 2 + i * 2) * 18 + (i - 1) * 26;
+              c.save();
+              c.globalAlpha = (1 - phase) * 0.72;
+              c.fillStyle = '#FFFDF9';
+              c.beginPath();
+              c.arc(sx, sy, 10 + phase * 8, 0, Math.PI * 2);
+              c.arc(sx + 9, sy + 3, 7 + phase * 5, 0, Math.PI * 2);
+              c.arc(sx - 9, sy + 3, 7 + phase * 5, 0, Math.PI * 2);
+              c.fill();
+              c.restore();
+            }
+          }
+          c.restore();
+        }
+
+        function drawChefMouse(c, cx, cy, time) {
+          c.save();
+          c.translate(cx, cy + Math.sin(time * 6) * 3);
+
+          // Tail curling playfully
+          c.strokeStyle = '#E89EA6';
+          c.lineWidth = 4.5;
+          c.lineCap = 'round';
+          c.beginPath();
+          c.moveTo(-22, 48);
+          c.bezierCurveTo(-68, 52, -78, 10, -56, -4);
+          c.stroke();
+
+          // Cozy Mouse Body + Cream Apron
+          c.fillStyle = '#9E938D';
+          c.strokeStyle = '#5D524D';
+          c.lineWidth = 2;
+          c.beginPath();
+          c.ellipse(0, 26, 30, 38, 0, 0, Math.PI * 2);
+          c.fill();
+          c.stroke();
+
+          // White Chef Apron
+          c.fillStyle = '#FFFDF9';
+          c.strokeStyle = '#D9CBB8';
+          c.beginPath();
+          c.roundRect(-20, 6, 40, 48, 8);
+          c.fill();
+          c.stroke();
+          // Tiny burgundy apron pocket heart
+          c.fillStyle = '#6B1D2F';
+          c.beginPath();
+          c.arc(0, 34, 4, 0, Math.PI * 2);
+          c.fill();
+
+          // Big Cute Ears
+          [[-24, -46], [24, -46]].forEach(([ex, ey]) => {
+            c.fillStyle = '#9E938D';
+            c.strokeStyle = '#5D524D';
+            c.lineWidth = 2;
+            c.beginPath();
+            c.arc(ex, ey, 18, 0, Math.PI * 2);
+            c.fill();
+            c.stroke();
+            c.fillStyle = '#F2B8BF';
+            c.beginPath();
+            c.arc(ex, ey, 11, 0, Math.PI * 2);
+            c.fill();
+          });
+
+          // Mouse Head
+          c.fillStyle = '#AEA39D';
+          c.strokeStyle = '#5D524D';
+          c.beginPath();
+          c.ellipse(0, -24, 27, 23, 0, 0, Math.PI * 2);
+          c.fill();
+          c.stroke();
+
+          // Tiny Chef's Toque
+          c.fillStyle = '#FFFDF9';
+          c.strokeStyle = '#C59B27';
+          c.lineWidth = 1.8;
+          c.beginPath();
+          c.arc(-10, -56, 12, 0, Math.PI * 2);
+          c.arc(0, -61, 14, 0, Math.PI * 2);
+          c.arc(10, -56, 12, 0, Math.PI * 2);
+          c.fill();
+          c.beginPath();
+          c.roundRect(-16, -50, 32, 14, 3);
+          c.fill();
+          c.stroke();
+
+          // Expressive Sparkling Eyes + Rosy Cheeks
+          [[-9, -27], [9, -27]].forEach(([ex, ey]) => {
+            c.fillStyle = '#241816';
+            c.beginPath();
+            c.arc(ex, ey, 4.3, 0, Math.PI * 2);
+            c.fill();
+            c.fillStyle = '#FFFFFF';
+            c.beginPath();
+            c.arc(ex - 1.5, ey - 1.5, 1.7, 0, Math.PI * 2);
+            c.fill();
+          });
+          c.fillStyle = 'rgba(235, 130, 140, 0.55)';
+          c.beginPath();
+          c.ellipse(-16, -18, 5, 3, 0, 0, Math.PI * 2);
+          c.ellipse(16, -18, 5, 3, 0, 0, Math.PI * 2);
+          c.fill();
+
+          // Pink Nose & Whiskers
+          c.fillStyle = '#EB8C96';
+          c.beginPath();
+          c.arc(0, -18, 4.2, 0, Math.PI * 2);
+          c.fill();
+          c.strokeStyle = '#5D524D';
+          c.lineWidth = 1.2;
+          [[-1, -18, -28, -22], [-1, -16, -28, -14], [1, -18, 28, -22], [1, -16, 28, -14]].forEach(([x1, y1, x2, y2]) => {
+            c.beginPath();
+            c.moveTo(x1 * 8, y1);
+            c.lineTo(x2, y2);
+            c.stroke();
+          });
+
+          // Animated Whisk Dancing in Right Paw
+          const whiskAngle = Math.sin(time * 9) * 0.45 - 0.35;
+          c.save();
+          c.translate(32, 12);
+          c.rotate(whiskAngle);
+          c.fillStyle = '#C85A17';
+          c.beginPath();
+          c.roundRect(-4, -26, 8, 26, 3);
+          c.fill();
+          c.strokeStyle = '#C6D1D6';
+          c.lineWidth = 1.6;
+          for (let w = -1; w <= 1; w++) {
+            c.beginPath();
+            c.ellipse(0, -44, 8 + Math.abs(w) * 3, 18, w * 0.16, 0, Math.PI * 2);
+            c.stroke();
+          }
+          c.restore();
+
+          // Cute Paw
+          c.fillStyle = '#F2B8BF';
+          c.beginPath();
+          c.arc(30, 14, 7, 0, Math.PI * 2);
+          c.fill();
+          c.restore();
+        }
+
+        function drawMiniFootballPlayer(c, cx, cy, time) {
+          c.save();
+          const jump = Math.abs(Math.sin(time * 7)) * 24;
+          const sway = Math.sin(time * 7) * 14;
+          c.translate(cx + sway, cy - jump);
+
+          // Sparkle trail behind dance
+          for (let i = 0; i < 6; i++) {
+            const sx = -sway * (i * 0.3) + Math.sin(time * 5 + i) * 28;
+            const sy = 24 + i * 8;
+            c.fillStyle = i % 2 === 0 ? '#E2BE53' : '#FFFDF9';
+            c.globalAlpha = 0.75 - i * 0.1;
+            c.beginPath();
+            c.arc(sx, sy, 4 - i * 0.4, 0, Math.PI * 2);
+            c.fill();
+          }
+          c.globalAlpha = 1;
+
+          // Jersey Body (Burgundy & Gold)
+          c.fillStyle = '#6B1D2F';
+          c.strokeStyle = '#3E0E1A';
+          c.lineWidth = 2;
+          c.beginPath();
+          c.roundRect(-22, -4, 44, 40, 10);
+          c.fill();
+          c.stroke();
+          c.fillStyle = '#E2BE53';
+          c.font = '700 16px "Plus Jakarta Sans", sans-serif';
+          c.textAlign = 'center';
+          c.fillText('28', 0, 22);
+
+          // Waving Arms
+          const wave = Math.sin(time * 12) * 0.5;
+          [[-22, -1, -1 - wave], [22, -1, 1 + wave]].forEach(([ax, ay, ang]) => {
+            c.save();
+            c.translate(ax, ay);
+            c.rotate(ang);
+            c.fillStyle = '#6B1D2F';
+            c.beginPath();
+            c.roundRect(-5, -24, 10, 26, 5);
+            c.fill();
+            c.fillStyle = '#FFFDF9';
+            c.beginPath();
+            c.arc(0, -25, 6, 0, Math.PI * 2);
+            c.fill();
+            c.restore();
+          });
+
+          // Helmet + Oversized Expressive Eyes
+          c.fillStyle = '#C59B27';
+          c.strokeStyle = '#78590C';
+          c.lineWidth = 2;
+          c.beginPath();
+          c.arc(0, -28, 25, 0, Math.PI * 2);
+          c.fill();
+          c.stroke();
+
+          // Face opening
+          c.fillStyle = '#F7C9A6';
+          c.beginPath();
+          c.roundRect(-16, -34, 32, 22, 8);
+          c.fill();
+
+          // Oversized Cute Eyes
+          [[-7, -25], [7, -25]].forEach(([ex, ey]) => {
+            c.fillStyle = '#1D1412';
+            c.beginPath();
+            c.ellipse(ex, ey, 5, 6.2, 0, 0, Math.PI * 2);
+            c.fill();
+            c.fillStyle = '#FFFFFF';
+            c.beginPath();
+            c.arc(ex - 1.5, ey - 2, 2, 0, Math.PI * 2);
+            c.fill();
+          });
+          // Happy Smile
+          c.strokeStyle = '#6B1D2F';
+          c.lineWidth = 1.8;
+          c.beginPath();
+          c.arc(0, -19, 5, 0.1, Math.PI - 0.1);
+          c.stroke();
+          c.restore();
+        }
+
+        function drawWinterAleMug(c, cx, cy, tilt, time) {
+          c.save();
+          c.translate(cx, cy);
+          c.rotate(tilt);
+
+          // Handle
+          c.strokeStyle = '#D9CBB8';
+          c.lineWidth = 8;
+          c.beginPath();
+          c.roundRect(24, -22, 22, 46, 10);
+          c.stroke();
+
+          // Glass Mug & Amber Ale
+          c.fillStyle = '#C85A17';
+          c.strokeStyle = '#6B1D2F';
+          c.lineWidth = 2.5;
+          c.beginPath();
+          c.roundRect(-30, -40, 60, 84, 8);
+          c.fill();
+          c.stroke();
+
+          // Highlight sheen & bubbles
+          c.fillStyle = 'rgba(255, 226, 150, 0.35)';
+          c.fillRect(-20, -32, 12, 68);
+          c.fillStyle = '#F9E4A7';
+          for (let i = 0; i < 4; i++) {
+            const by = 32 - ((time * 36 + i * 18) % 62);
+            c.beginPath();
+            c.arc(-4 + i * 7, by, 2.2, 0, Math.PI * 2);
+            c.fill();
+          }
+
+          // Frothy Cream Foam Crown
+          c.fillStyle = '#FFFDF9';
+          c.strokeStyle = '#DFD1BC';
+          c.lineWidth = 1.5;
+          c.beginPath();
+          c.arc(-18, -42, 13, 0, Math.PI * 2);
+          c.arc(0, -46, 15, 0, Math.PI * 2);
+          c.arc(18, -42, 13, 0, Math.PI * 2);
+          c.fill();
+          c.stroke();
+          c.restore();
+        }
+
+        function drawSmilingAcorn(c, x, y, sway) {
+          c.save();
+          c.translate(x, y);
+          c.rotate(sway);
+          c.fillStyle = '#C59B27';
+          c.strokeStyle = '#78590C';
+          c.lineWidth = 1.8;
+          c.beginPath();
+          c.ellipse(0, 6, 11, 13, 0, 0, Math.PI * 2);
+          c.fill();
+          c.stroke();
+          // Cap
+          c.fillStyle = '#7A4B2A';
+          c.beginPath();
+          c.ellipse(0, -4, 14, 7, 0, Math.PI, Math.PI * 2);
+          c.closePath();
+          c.fill();
+          c.stroke();
+          c.beginPath();
+          c.moveTo(0, -11);
+          c.lineTo(0, -16);
+          c.stroke();
+          // Cute Smile & Eyes
+          c.fillStyle = '#271C19';
+          c.beginPath();
+          c.arc(-4, 4, 1.5, 0, Math.PI * 2);
+          c.arc(4, 4, 1.5, 0, Math.PI * 2);
+          c.fill();
+          c.strokeStyle = '#271C19';
+          c.lineWidth = 1.3;
+          c.beginPath();
+          c.arc(0, 7, 3.5, 0.15, Math.PI - 0.15);
+          c.stroke();
+          c.restore();
+        }
+
+        function drawSmilingPinecone(c, x, y, sway) {
+          c.save();
+          c.translate(x, y);
+          c.rotate(sway);
+          c.fillStyle = '#8B542F';
+          c.strokeStyle = '#4A2B18';
+          c.lineWidth = 1.6;
+          c.beginPath();
+          c.ellipse(0, 0, 12, 16, 0, 0, Math.PI * 2);
+          c.fill();
+          c.stroke();
+          // Scales
+          c.strokeStyle = '#D9B44A';
+          c.lineWidth = 1;
+          for (let sy = -8; sy <= 8; sy += 6) {
+            c.beginPath();
+            c.arc(0, sy, 8, 0.2, Math.PI - 0.2);
+            c.stroke();
+          }
+          // Cute Eyes & Smile
+          c.fillStyle = '#FFFDF9';
+          c.beginPath();
+          c.arc(-3.5, -3, 1.6, 0, Math.PI * 2);
+          c.arc(3.5, -3, 1.6, 0, Math.PI * 2);
+          c.fill();
+          c.strokeStyle = '#FFFDF9';
+          c.lineWidth = 1.2;
+          c.beginPath();
+          c.arc(0, 1, 3.2, 0.15, Math.PI - 0.15);
+          c.stroke();
+          c.restore();
+        }
+
+        function renderMontageFrame(t) {
+          mCtx.clearRect(0, 0, MW, MH);
+
+          // CHAPTER 0 (0.0 – 3.5s): Cozy Dining Room Reveal behind Swirling Leaves
+          if (t < 3.5) {
+            const p = clamp01(t / 3.5);
+            const curtain = easeInOut(clamp01((t - 0.9) / 2.3));
+
+            if (lastAudioCue < 0) {
+              lastAudioCue = 0;
+              HolidayAudio.harp();
+            }
+            mChapterEl.textContent = 'Chapter I · Welcome Home';
+            mCaptionEl.textContent =
+              'Crisp autumn leaves swirl across parchment, parting to reveal the warm-lit Tokar dining room...';
+
+            // Warm-lit Dining Room Reveal
+            const bg = mCtx.createRadialGradient(MW / 2, MH * 0.4, 40, MW / 2, MH / 2, 540);
+            bg.addColorStop(0, '#FFE4A8');
+            bg.addColorStop(0.45, '#9E5429');
+            bg.addColorStop(1, '#3B1D19');
+            mCtx.fillStyle = bg;
+            mCtx.fillRect(0, 0, MW, MH);
+
+            // Chandelier Silhouette & Warm Glow
+            mCtx.strokeStyle = '#C59B27';
+            mCtx.lineWidth = 3;
+            mCtx.beginPath();
+            mCtx.moveTo(MW / 2, 0);
+            mCtx.lineTo(MW / 2, 110);
+            mCtx.stroke();
+            mCtx.beginPath();
+            mCtx.ellipse(MW / 2, 125, 130, 26, 0, 0, Math.PI * 2);
+            mCtx.stroke();
+            [-110, -55, 0, 55, 110].forEach((ox) => {
+              mCtx.fillStyle = '#FFE48E';
+              mCtx.beginPath();
+              cGlow(mCtx, MW / 2 + ox, 112, 22);
+              mCtx.fillStyle = '#FFFDF9';
+              mCtx.fillRect(MW / 2 + ox - 3, 102, 6, 16);
+            });
+
+            // Long Dining Table Preview
+            mCtx.fillStyle = '#5D331B';
+            mCtx.fillRect(140, 360, 680, 120);
+            mCtx.fillStyle = '#FAF6F0';
+            mCtx.fillRect(210, 360, 540, 32);
+
+            // Parchment Backdrop Curtains Parting
+            const openOffset = curtain * (MW * 0.56);
+            mCtx.fillStyle = '#FAF6F0';
+            mCtx.fillRect(0, 0, MW / 2 - openOffset, MH);
+            mCtx.fillRect(MW / 2 + openOffset, 0, MW / 2, MH);
+
+            // Swirling Autumn Leaves parting left & right
+            for (const leaf of mSwirlLeaves) {
+              const lx = leaf.x0 + leaf.side * curtain * 520 + Math.sin(t * 2.4 + leaf.y0) * 28;
+              const ly = leaf.y0 + Math.cos(t * 1.9 + leaf.x0) * 22;
+              mCtx.save();
+              mCtx.translate(lx, ly);
+              mCtx.rotate(leaf.rot0 + t * 1.4 * leaf.side);
+              mCtx.globalAlpha = 1 - clamp01((t - 2.6) / 0.9);
+              drawMapleLeaf(mCtx, leaf.size, leaf.color);
+              mCtx.restore();
+            }
+          }
+          // CHAPTER 1 (3.5 – 9.0s): Morning Prep & Kitchen Magic
+          else if (t < 9.0) {
+            const localT = t - 3.5;
+            if (lastAudioCue < 1) {
+              lastAudioCue = 1;
+              HolidayAudio.chime();
+            }
+            mChapterEl.textContent = 'Chapter II · Morning Prep & Kitchen Magic';
+            mCaptionEl.textContent =
+              'Golden morning sunlight streams onto the island as Chef Mouse whisks beside a glistening, herb-rubbed turkey.';
+
+            // Sunny Kitchen Wall + Frosted Window
+            const kBg = mCtx.createLinearGradient(0, 0, 0, MH);
+            kBg.addColorStop(0, '#FDF5E6');
+            kBg.addColorStop(1, '#E7D4BA');
+            mCtx.fillStyle = kBg;
+            mCtx.fillRect(0, 0, MW, MH);
+
+            // Frosted Window Left
+            mCtx.fillStyle = '#FFFDF9';
+            mCtx.strokeStyle = '#B89D7A';
+            mCtx.lineWidth = 6;
+            mCtx.fillRect(70, 50, 210, 210);
+            mCtx.strokeRect(70, 50, 210, 210);
+            mCtx.beginPath();
+            mCtx.moveTo(175, 50);
+            mCtx.lineTo(175, 260);
+            mCtx.moveTo(70, 155);
+            mCtx.lineTo(280, 155);
+            mCtx.stroke();
+
+            // Golden Diagonal Morning Sunbeams
+            mCtx.save();
+            const beamGrad = mCtx.createLinearGradient(120, 60, 680, 460);
+            beamGrad.addColorStop(0, 'rgba(255, 226, 138, 0.42)');
+            beamGrad.addColorStop(1, 'rgba(255, 226, 138, 0)');
+            mCtx.fillStyle = beamGrad;
+            mCtx.beginPath();
+            mCtx.moveTo(70, 50);
+            mCtx.lineTo(280, 50);
+            mCtx.lineTo(790, MH);
+            mCtx.lineTo(390, MH);
+            mCtx.closePath();
+            mCtx.fill();
+            mCtx.restore();
+
+            // Kitchen Island
+            mCtx.fillStyle = '#8F5A34';
+            mCtx.fillRect(0, 370, MW, 170);
+            mCtx.fillStyle = '#FFFDF9';
+            mCtx.fillRect(0, 354, MW, 22);
+
+            // Cute Chef Mouse & Glistening Turkey
+            const glide = easeInOut(clamp01(localT / 5.5)) * 28 - 14;
+            drawChefMouse(mCtx, 305 + glide, 290, localT);
+            drawCuteTurkey(mCtx, 600 - glide * 0.6, 315, 1.15, localT, true);
+          }
+          // CHAPTER 2 (9.0 – 14.5s): Game Day Energy
+          else if (t < 14.5) {
+            const localT = t - 9.0;
+            if (lastAudioCue < 2) {
+              lastAudioCue = 2;
+              HolidayAudio.stadiumCheer();
+            }
+            if (localT > 2.4 && lastAudioCue < 3) {
+              lastAudioCue = 3;
+              HolidayAudio.clink();
+            }
+            mChapterEl.textContent = 'Chapter III · Game Day Energy';
+            mCaptionEl.textContent =
+              'A touchdown dance lights up the screen as frosted mugs of winter ale clink together: Cheers!';
+
+            // Cozy Living Room Backdrop
+            const lrBg = mCtx.createLinearGradient(0, 0, 0, MH);
+            lrBg.addColorStop(0, '#3D241E');
+            lrBg.addColorStop(1, '#241411');
+            mCtx.fillStyle = lrBg;
+            mCtx.fillRect(0, 0, MW, MH);
+
+            // Glowing Television Frame
+            mCtx.fillStyle = '#4B2E1B';
+            mCtx.strokeStyle = '#C59B27';
+            mCtx.lineWidth = 4;
+            mCtx.beginPath();
+            mCtx.roundRect(210, 48, 540, 305, 18);
+            mCtx.fill();
+            mCtx.stroke();
+
+            // Green Stadium Turf Screen
+            const tvGrad = mCtx.createLinearGradient(230, 68, 230, 333);
+            tvGrad.addColorStop(0, '#1D442B');
+            tvGrad.addColorStop(0.55, '#2E6F40');
+            tvGrad.addColorStop(1, '#3B8A4E');
+            mCtx.fillStyle = tvGrad;
+            mCtx.beginPath();
+            mCtx.roundRect(230, 68, 500, 265, 10);
+            mCtx.fill();
+
+            // Yard Lines & Goalpost
+            mCtx.strokeStyle = 'rgba(255,255,255,0.4)';
+            mCtx.lineWidth = 2;
+            for (let y = 210; y <= 310; y += 32) {
+              mCtx.beginPath();
+              mCtx.moveTo(240, y);
+              mCtx.lineTo(720, y);
+              mCtx.stroke();
+            }
+            mCtx.strokeStyle = '#F2C14E';
+            mCtx.lineWidth = 5;
+            mCtx.beginPath();
+            mCtx.moveTo(480, 185);
+            mCtx.lineTo(480, 150);
+            mCtx.moveTo(435, 150);
+            mCtx.lineTo(525, 150);
+            mCtx.moveTo(435, 150);
+            mCtx.lineTo(435, 92);
+            mCtx.moveTo(525, 150);
+            mCtx.lineTo(525, 92);
+            mCtx.stroke();
+
+            // Cute End-Zone Dance Football Player
+            drawMiniFootballPlayer(mCtx, 480, 255, localT);
+
+            // Slow-Motion Clinking Winter Ale Mugs in Foreground
+            const clinkProgress = easeInOut(clamp01((localT - 0.8) / 1.8));
+            const leftX = 160 + clinkProgress * 238;
+            const rightX = 800 - clinkProgress * 238;
+            drawWinterAleMug(mCtx, leftX, 425, clinkProgress * 0.22, localT);
+            drawWinterAleMug(mCtx, rightX, 425, -clinkProgress * 0.22, localT);
+
+            // "Cheers!" Bubbles after Clink
+            if (localT > 2.3) {
+              const bt = localT - 2.3;
+              mCtx.save();
+              mCtx.fillStyle = '#FFFDF9';
+              mCtx.strokeStyle = '#C59B27';
+              mCtx.lineWidth = 2;
+              const popScale = easeOutBack(clamp01(bt / 0.5));
+              mCtx.translate(480, 325 - bt * 14);
+              mCtx.scale(popScale, popScale);
+              mCtx.beginPath();
+              mCtx.roundRect(-58, -22, 116, 40, 20);
+              mCtx.fill();
+              mCtx.stroke();
+              mCtx.fillStyle = '#6B1D2F';
+              mCtx.font = '700 18px "Playfair Display", Georgia, serif';
+              mCtx.textAlign = 'center';
+              mCtx.fillText('Cheers!', 0, 5);
+              mCtx.restore();
+            }
+
+            // Fluttering Autumn Leaf Entrance Wipe (0s - 0.7s)
+            if (localT < 0.8) {
+              mCtx.save();
+              const wipeX = -120 + (localT / 0.8) * (MW + 300);
+              mCtx.translate(wipeX, MH / 2);
+              mCtx.rotate(localT * 4);
+              drawMapleLeaf(mCtx, 180, '#C85A17');
+              mCtx.restore();
+            }
+          }
+          // CHAPTER 3 (14.5 – 20.0s): The Gathering Feast
+          else if (t < 20.0) {
+            const localT = t - 14.5;
+            if (localT >= 0.3 && lastAudioCue < 4) {
+              lastAudioCue = 4;
+              HolidayAudio.pop();
+            }
+            if (localT >= 1.2 && lastAudioCue < 5) {
+              lastAudioCue = 5;
+              HolidayAudio.pop();
+            }
+            if (localT >= 2.1 && lastAudioCue < 6) {
+              lastAudioCue = 6;
+              HolidayAudio.pop();
+            }
+            if (localT >= 3.0 && lastAudioCue < 7) {
+              lastAudioCue = 7;
+              HolidayAudio.pop();
+            }
+            mChapterEl.textContent = 'Chapter IV · The Gathering Feast';
+            mCaptionEl.textContent =
+              'Overhead across cream linen, every homemade dish pops into place—from buttery potatoes to sweet popcorn dessert.';
+
+            // Overhead Rustic Wooden Table + Cream Linen Runner
+            const panX = -easeInOut(clamp01(localT / 5.5)) * 120 + 60;
+            mCtx.save();
+            mCtx.translate(panX, 0);
+
+            mCtx.fillStyle = '#7C4D2B';
+            mCtx.fillRect(-120, 0, MW + 240, MH);
+            // Wood grain
+            mCtx.strokeStyle = 'rgba(42, 22, 12, 0.25)';
+            mCtx.lineWidth = 2;
+            for (let y = 40; y < MH; y += 45) {
+              mCtx.beginPath();
+              mCtx.moveTo(-120, y);
+              mCtx.lineTo(MW + 120, y);
+              mCtx.stroke();
+            }
+            // Cream Linen Table Runner
+            mCtx.fillStyle = '#FAF6F0';
+            mCtx.strokeStyle = '#C59B27';
+            mCtx.lineWidth = 3;
+            mCtx.fillRect(-120, 125, MW + 240, 290);
+            mCtx.strokeRect(-120, 134, MW + 240, 272);
+
+            // Overhead Autumn Floral Sprigs
+            [110, 480, 840].forEach((fx) => {
+              mCtx.save();
+              mCtx.translate(fx, 165);
+              drawMapleLeaf(mCtx, 16, '#C85A17');
+              mCtx.translate(22, 10);
+              drawMapleLeaf(mCtx, 13, '#6B1D2F');
+              mCtx.restore();
+            });
+
+            // Helper to pop dishes in sequentially
+            const popDish = (appearTime, x, y, drawFn) => {
+              if (localT < appearTime) return;
+              const dt = clamp01((localT - appearTime) / 0.55);
+              const sc = Math.max(0.01, easeOutBack(dt));
+              mCtx.save();
+              mCtx.translate(x, y);
+              mCtx.scale(sc, sc);
+              drawFn();
+              mCtx.restore();
+            };
+
+            // 1. Mashed Potatoes Bowl
+            popDish(0.3, 180, 270, () => {
+              mCtx.fillStyle = '#6B1D2F';
+              mCtx.beginPath();
+              mCtx.arc(0, 0, 56, 0, Math.PI * 2);
+              mCtx.fill();
+              mCtx.fillStyle = '#FAF0D7';
+              mCtx.beginPath();
+              mCtx.arc(0, 0, 46, 0, Math.PI * 2);
+              mCtx.fill();
+              mCtx.fillStyle = '#F3C14B';
+              mCtx.fillRect(-10, -10, 20, 16);
+            });
+
+            // 2. Bubbling Mac & Cheese Casserole
+            popDish(1.2, 360, 255, () => {
+              mCtx.fillStyle = '#C85A17';
+              mCtx.beginPath();
+              mCtx.roundRect(-62, -45, 124, 90, 16);
+              mCtx.fill();
+              mCtx.fillStyle = '#F4B844';
+              mCtx.beginPath();
+              mCtx.roundRect(-52, -35, 104, 70, 10);
+              mCtx.fill();
+              // Animated cheese bubbles
+              for (let b = 0; b < 5; b++) {
+                const br = 4 + Math.sin(localT * 6 + b) * 2;
+                mCtx.fillStyle = '#FFE38A';
+                mCtx.beginPath();
+                mCtx.arc(-28 + b * 14, (b % 2 === 0 ? -12 : 12), br, 0, Math.PI * 2);
+                mCtx.fill();
+              }
+            });
+
+            // 3. Caramelized Brussels Sprouts & Carrots
+            popDish(2.1, 550, 280, () => {
+              mCtx.fillStyle = '#EAE0D0';
+              mCtx.beginPath();
+              mCtx.ellipse(0, 0, 68, 46, 0, 0, Math.PI * 2);
+              mCtx.fill();
+              [[-28, -8], [-6, 12], [18, -10], [32, 10], [0, -16]].forEach(([sx, sy]) => {
+                mCtx.fillStyle = '#4A5D4E';
+                mCtx.beginPath();
+                mCtx.arc(sx, sy, 12, 0, Math.PI * 2);
+                mCtx.fill();
+                mCtx.fillStyle = '#6B2F11';
+                mCtx.beginPath();
+                mCtx.arc(sx - 3, sy - 3, 4, 0, Math.PI * 2);
+                mCtx.fill();
+              });
+              [[-18, 16], [14, 18], [-36, 10]].forEach(([cx, cy]) => {
+                mCtx.fillStyle = '#E0691E';
+                mCtx.beginPath();
+                mCtx.arc(cx, cy, 8, 0, Math.PI * 2);
+                mCtx.fill();
+              });
+            });
+
+            // 4. Towering Sweet Popcorn Dessert Bowl
+            popDish(3.0, 745, 260, () => {
+              mCtx.fillStyle = '#6B1D2F';
+              mCtx.strokeStyle = '#C59B27';
+              mCtx.lineWidth = 3;
+              mCtx.beginPath();
+              mCtx.arc(0, 0, 58, 0, Math.PI * 2);
+              mCtx.fill();
+              mCtx.stroke();
+              // Glistening Popcorn Kernels
+              [
+                [-24, -18], [0, -24], [22, -16], [-32, 6], [-8, -2],
+                [16, 4], [30, 14], [-14, 22], [10, 24], [0, 8],
+              ].forEach(([px, py], idx) => {
+                mCtx.fillStyle = idx % 2 === 0 ? '#FFFDF5' : '#FCE8A6';
+                mCtx.beginPath();
+                mCtx.arc(px, py, 12, 0, Math.PI * 2);
+                mCtx.fill();
+                mCtx.fillStyle = '#FFFFFF';
+                mCtx.beginPath();
+                mCtx.arc(px - 3, py - 3, 3, 0, Math.PI * 2);
+                mCtx.fill();
+              });
+            });
+
+            mCtx.restore();
+          }
+          // CHAPTER 4 (20.0s+): The Gratitude Finale & Glowing Banner
+          else {
+            const localT = t - 20.0;
+            if (lastAudioCue < 8) {
+              lastAudioCue = 8;
+              HolidayAudio.fanfare();
+            }
+            mChapterEl.textContent = 'Chapter V · The Gratitude Finale';
+            mCaptionEl.textContent =
+              'Warm candlelight lifts glowing notes of thanks like paper lanterns, wishing everyone a Happy Thanksgiving!';
+
+            // Warm Candlelit Dining Backdrop
+            const fBg = mCtx.createRadialGradient(MW / 2, MH * 0.65, 30, MW / 2, MH / 2, 540);
+            fBg.addColorStop(0, '#5A2A20');
+            fBg.addColorStop(0.6, '#361714');
+            fBg.addColorStop(1, '#1E0D0B');
+            mCtx.fillStyle = fBg;
+            mCtx.fillRect(0, 0, MW, MH);
+
+            // Flickering Candles along the bottom table
+            [180, 360, 600, 780].forEach((cx, idx) => {
+              const flicker = Math.sin(localT * 9 + idx * 1.7) * 3;
+              mCtx.save();
+              mCtx.fillStyle = 'rgba(255, 214, 120, 0.24)';
+              mCtx.beginPath();
+              mCtx.arc(cx, 445, 58 + flicker * 2, 0, Math.PI * 2);
+              mCtx.fill();
+              mCtx.fillStyle = '#FFFDF9';
+              mCtx.fillRect(cx - 9, 462, 18, 44);
+              mCtx.fillStyle = '#F7B733';
+              mCtx.beginPath();
+              mCtx.ellipse(cx + flicker * 0.4, 452, 6, 11, 0, 0, Math.PI * 2);
+              mCtx.fill();
+              mCtx.restore();
+            });
+
+            // Floating Gratitude Lantern Notes rising upward
+            const labels = getLanternLabels();
+            labels.forEach((lbl, idx) => {
+              const rise = (localT * 28 + idx * 55) % 440;
+              const lx = 150 + idx * 132 + Math.sin(localT * 1.5 + idx) * 18;
+              const ly = 440 - rise;
+              const alpha = clamp01(1 - rise / 430);
+              mCtx.save();
+              mCtx.globalAlpha = alpha * 0.92;
+              mCtx.fillStyle = 'rgba(255, 224, 148, 0.32)';
+              mCtx.beginPath();
+              mCtx.arc(lx, ly, 38, 0, Math.PI * 2);
+              mCtx.fill();
+
+              mCtx.fillStyle = '#FFF9E8';
+              mCtx.strokeStyle = '#C59B27';
+              mCtx.lineWidth = 1.8;
+              mCtx.beginPath();
+              mCtx.roundRect(lx - 32, ly - 22, 64, 44, 6);
+              mCtx.fill();
+              mCtx.stroke();
+
+              mCtx.fillStyle = '#6B1D2F';
+              mCtx.font = 'italic 600 11px "Playfair Display", Georgia, serif';
+              mCtx.textAlign = 'center';
+              mCtx.fillText(lbl.slice(0, 10), lx, ly + 4);
+              mCtx.restore();
+            });
+
+            // Shimmering Golden Banner: "Happy Thanksgiving"
+            if (localT >= 0.6) {
+              const bannerScale = Math.max(0.01, easeOutBack(clamp01((localT - 0.6) / 1.1)));
+              mCtx.save();
+              mCtx.translate(MW / 2, 225);
+              mCtx.scale(bannerScale, bannerScale);
+
+              const bGrad = mCtx.createLinearGradient(-260, -65, 260, 65);
+              bGrad.addColorStop(0, '#FFFDF9');
+              bGrad.addColorStop(0.5, '#FAF0DC');
+              bGrad.addColorStop(1, '#FFFDF9');
+              mCtx.fillStyle = bGrad;
+              mCtx.strokeStyle = '#E2BE53';
+              mCtx.lineWidth = 4;
+              mCtx.beginPath();
+              mCtx.roundRect(-275, -72, 550, 144, 18);
+              mCtx.fill();
+              mCtx.stroke();
+
+              mCtx.fillStyle = '#6B1D2F';
+              mCtx.font = '700 46px "Playfair Display", Georgia, serif';
+              mCtx.textAlign = 'center';
+              mCtx.fillText('Happy Thanksgiving', 0, 2);
+
+              mCtx.fillStyle = '#C85A17';
+              mCtx.font = '600 16px "Plus Jakarta Sans", sans-serif';
+              mCtx.fillText('With love from the Tokar Family · Nov 28th', 0, 38);
+              mCtx.restore();
+            }
+
+            // Animated Border of Smiling Acorns & Pinecones
+            const borderPts = [
+              [55, 55], [220, 44], [480, 40], [740, 44], [905, 55],
+              [55, 485], [220, 496], [480, 500], [740, 496], [905, 485],
+              [44, 195], [44, 345], [916, 195], [916, 345],
+            ];
+            borderPts.forEach(([bx, by], idx) => {
+              const sway = Math.sin(localT * 3 + idx) * 0.14;
+              if (idx % 2 === 0) drawSmilingAcorn(mCtx, bx, by, sway);
+              else drawSmilingPinecone(mCtx, bx, by, sway);
+            });
+          }
+        }
+
+        function cGlow(c, x, y, r) {
+          const g = c.createRadialGradient(x, y, 2, x, y, r);
+          g.addColorStop(0, 'rgba(255, 232, 158, 0.85)');
+          g.addColorStop(1, 'rgba(255, 232, 158, 0)');
+          c.fillStyle = g;
+          c.beginPath();
+          c.arc(x, y, r, 0, Math.PI * 2);
+          c.fill();
+        }
+
+        function montageLoop(ts) {
+          if (!montageModal.classList.contains('open')) {
+            montageRaf = null;
+            return;
+          }
+          const dt = montageLastTs ? Math.min(0.05, Math.max(0, (ts - montageLastTs) / 1000)) : 0.016;
+          montageLastTs = ts;
+          montageElapsed += dt;
+
+          const pct = Math.min(100, (montageElapsed / MONTAGE_DURATION) * 100);
+          mProgressEl.style.width = `${pct}%`;
+
+          try {
+            renderMontageFrame(montageElapsed);
+          } finally {
+            montageRaf = requestAnimationFrame(montageLoop);
+          }
+        }
+
+        function openMontage() {
+          finaleLaunchedOnce = true;
+          setupMontageCanvas();
+          montageElapsed = 0;
+          montageLastTs = 0;
+          lastAudioCue = -1;
+          mProgressEl.style.width = '0%';
+          montageModal.classList.add('open');
+          document.body.style.overflow = 'hidden';
+          if (montageRaf) cancelAnimationFrame(montageRaf);
+          montageRaf = requestAnimationFrame(montageLoop);
+        }
+
+        function closeMontage() {
+          montageModal.classList.remove('open');
+          document.body.style.overflow = '';
+          if (montageRaf) {
+            cancelAnimationFrame(montageRaf);
+            montageRaf = null;
+          }
+        }
+
+        replayMontageFooterBtn.addEventListener('click', openMontage);
+        mReplayBtn.addEventListener('click', openMontage);
+        mCloseBtn.addEventListener('click', closeMontage);
+        montageModal.addEventListener('click', (e) => {
+          if (e.target === montageModal) closeMontage();
+        });
+        mMuteBtn.addEventListener('click', () => {
+          const isMuted = HolidayAudio.toggleMute();
+          syncMuteButtons(isMuted);
         });
       })();
     </script>
