@@ -818,18 +818,52 @@
 
       .gratitude-board-header {
         display: flex;
-        align-items: baseline;
+        align-items: center;
         justify-content: space-between;
-        gap: 1rem;
+        flex-wrap: wrap;
+        gap: 0.75rem;
         margin-bottom: 1.25rem;
         padding-bottom: 0.65rem;
         border-bottom: 1px solid var(--border-hairline);
+      }
+
+      .gratitude-board-meta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
       }
 
       .gratitude-count {
         font-size: 0.88rem;
         color: var(--ink-muted);
         font-variant-numeric: tabular-nums;
+      }
+
+      .host-manage-btn {
+        background: transparent;
+        border: 1px solid var(--border-hairline);
+        color: var(--ink-muted);
+        font-size: 0.76rem;
+        font-weight: 600;
+        padding: 0.25rem 0.6rem;
+        border-radius: 4px;
+        cursor: pointer;
+        transition:
+          color 160ms,
+          border-color 160ms,
+          background-color 160ms;
+      }
+
+      .host-manage-btn:hover {
+        color: var(--burgundy);
+        border-color: var(--border-gold);
+        background: var(--burgundy-soft);
+      }
+
+      .host-manage-btn.is-active {
+        color: var(--burgundy);
+        border-color: var(--gold);
+        background: var(--gold-soft);
       }
 
       .gratitude-grid {
@@ -2103,7 +2137,17 @@
                 <h3 style="font-family: var(--font-display); margin: 0; color: var(--burgundy); font-size: 1.3rem">
                   Shared Gratitude Board
                 </h3>
-                <span id="gratitude-count" class="gratitude-count">0 entries</span>
+                <div class="gratitude-board-meta">
+                  <span id="gratitude-count" class="gratitude-count">Loading...</span>
+                  <button
+                    type="button"
+                    id="host-manage-btn"
+                    class="host-manage-btn"
+                    title="Host sign-in to moderate posts"
+                  >
+                    Host Manage
+                  </button>
+                </div>
               </div>
 
               <div id="gratitude-grid" class="gratitude-grid" aria-live="polite"></div>
@@ -2827,40 +2871,38 @@
         });
 
         /* ----------------------------------------------------------------------
-           8. INTERACTIVE GRATITUDE WALL (localStorage — Starts Empty)
+           8. INTERACTIVE GRATITUDE WALL (Shared Firestore Real-Time Sync)
            ---------------------------------------------------------------------- */
-        const STORAGE_KEY = 'tokar_thanksgiving_gratitude_v2';
+        let gratitudeEntries = [];
+        let boardLoaded = false;
+        let isHostAdmin = false;
+        let lastCreatedNoteId = null;
 
-        function loadGratitudeEntries() {
-          try {
-            const raw = localStorage.getItem(STORAGE_KEY);
-            if (!raw) return [];
-            const parsed = JSON.parse(raw);
-            if (Array.isArray(parsed)) return parsed;
-          } catch {
-            // Fall back cleanly if localStorage is restricted
-          }
-          return [];
-        }
-
-        function saveGratitudeEntries(entries) {
-          try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
-          } catch {
-            // Ignore storage quota errors gracefully
-          }
-        }
-
-        let gratitudeEntries = loadGratitudeEntries();
         const gratitudeGrid = document.getElementById('gratitude-grid');
         const gratitudeCount = document.getElementById('gratitude-count');
         const gratitudeForm = document.getElementById('gratitude-form');
+        const gratitudeSubmitBtn = gratitudeForm.querySelector('button[type="submit"]');
         const gratitudeError = document.getElementById('gratitude-error');
         const nameInput = document.getElementById('gratitude-name');
         const msgInput = document.getElementById('gratitude-message');
+        const hostManageBtn = document.getElementById('host-manage-btn');
 
         function renderGratitudeBoard(newestId = null) {
           gratitudeGrid.innerHTML = '';
+          if (!boardLoaded) {
+            gratitudeCount.textContent = 'Syncing...';
+            const loading = document.createElement('div');
+            loading.className = 'gratitude-empty';
+            const title = document.createElement('p');
+            title.textContent = 'Loading the shared family Gratitude Board...';
+            const sub = document.createElement('span');
+            sub.textContent = 'Connecting across devices so everyone sees all notes.';
+            loading.appendChild(title);
+            loading.appendChild(sub);
+            gratitudeGrid.appendChild(loading);
+            return;
+          }
+
           gratitudeCount.textContent = `${gratitudeEntries.length} ${
             gratitudeEntries.length === 1 ? 'entry' : 'entries'
           }`;
@@ -2871,7 +2913,7 @@
             const title = document.createElement('p');
             title.textContent = 'The Gratitude Board is waiting for its first note.';
             const sub = document.createElement('span');
-            sub.textContent = 'Add your name and something you are thankful for to start the family keepsake!';
+            sub.textContent = 'Add your name and something you are thankful for—everyone with this invite will see it!';
             empty.appendChild(title);
             empty.appendChild(sub);
             gratitudeGrid.appendChild(empty);
@@ -2902,17 +2944,25 @@
             left.appendChild(meta);
             footer.appendChild(left);
 
-            const delBtn = document.createElement('button');
-            delBtn.type = 'button';
-            delBtn.className = 'keepsake-remove';
-            delBtn.textContent = 'Remove';
-            delBtn.setAttribute('aria-label', `Remove note from ${entry.name}`);
-            delBtn.addEventListener('click', () => {
-              gratitudeEntries = gratitudeEntries.filter((item) => item.id !== entry.id);
-              saveGratitudeEntries(gratitudeEntries);
-              renderGratitudeBoard();
-            });
-            footer.appendChild(delBtn);
+            if (isHostAdmin) {
+              const delBtn = document.createElement('button');
+              delBtn.type = 'button';
+              delBtn.className = 'keepsake-remove';
+              delBtn.textContent = 'Remove';
+              delBtn.setAttribute('aria-label', `Remove note from ${entry.name}`);
+              delBtn.addEventListener('click', async () => {
+                if (!window.TokarGratitudeAPI) return;
+                delBtn.disabled = true;
+                try {
+                  await window.TokarGratitudeAPI.deleteNote(entry.id);
+                  showToast(`Removed note from ${entry.name}.`);
+                } catch {
+                  delBtn.disabled = false;
+                  showToast('Only the verified host can remove shared notes.');
+                }
+              });
+              footer.appendChild(delBtn);
+            }
 
             card.appendChild(quote);
             card.appendChild(footer);
@@ -2920,36 +2970,101 @@
           });
         }
 
-        gratitudeForm.addEventListener('submit', (e) => {
+        function syncFromBridge() {
+          if (!window.TokarGratitudeAPI) return;
+          const state = window.TokarGratitudeAPI.getState();
+          gratitudeEntries = state.notes || [];
+          boardLoaded = Boolean(state.loaded);
+          isHostAdmin = Boolean(state.auth && state.auth.isHostAdmin);
+          if (state.errorMessage) {
+            gratitudeError.textContent = state.errorMessage;
+          }
+          hostManageBtn.textContent = isHostAdmin ? 'Host Sign Out' : 'Host Manage';
+          hostManageBtn.classList.toggle('is-active', isHostAdmin);
+          renderGratitudeBoard(lastCreatedNoteId);
+        }
+
+        window.TokarGratitudeUI = {
+          onNotesUpdated(notes, loaded) {
+            gratitudeEntries = Array.isArray(notes) ? notes : [];
+            boardLoaded = Boolean(loaded);
+            const highlightId = lastCreatedNoteId;
+            lastCreatedNoteId = null;
+            renderGratitudeBoard(highlightId);
+          },
+          onAuthUpdated(authState) {
+            isHostAdmin = Boolean(authState && authState.isHostAdmin);
+            hostManageBtn.textContent = isHostAdmin ? 'Host Sign Out' : 'Host Manage';
+            hostManageBtn.classList.toggle('is-active', isHostAdmin);
+            renderGratitudeBoard();
+          },
+          onBoardError(message) {
+            boardLoaded = true;
+            gratitudeError.textContent = message;
+            renderGratitudeBoard();
+          },
+        };
+
+        window.addEventListener('tokar-gratitude-ready', syncFromBridge);
+
+        hostManageBtn.addEventListener('click', async () => {
+          if (!window.TokarGratitudeAPI) {
+            showToast('Still connecting to the shared board...');
+            return;
+          }
+          try {
+            if (isHostAdmin) {
+              await window.TokarGratitudeAPI.signOutHost();
+              showToast('Signed out of host moderation.');
+            } else {
+              const authState = await window.TokarGratitudeAPI.signInHost();
+              if (authState.isHostAdmin) {
+                showToast('Host moderation enabled.');
+              } else {
+                await window.TokarGratitudeAPI.signOutHost();
+                showToast('Only the event host account can moderate shared notes.');
+              }
+            }
+          } catch {
+            showToast('Host sign-in was cancelled or blocked.');
+          }
+        });
+
+        gratitudeForm.addEventListener('submit', async (e) => {
           e.preventDefault();
-          const name = nameInput.value.trim();
-          const message = msgInput.value.trim();
+          const name = nameInput.value.trim().slice(0, 48);
+          const message = msgInput.value.trim().slice(0, 240);
 
           if (!name || !message) {
             gratitudeError.textContent = 'Please enter both your name and what you are thankful for.';
             return;
           }
+          if (!window.TokarGratitudeAPI) {
+            gratitudeError.textContent = 'Connecting to the shared board—please try again in a moment.';
+            return;
+          }
+
           gratitudeError.textContent = '';
+          gratitudeSubmitBtn.disabled = true;
+          const prevLabel = gratitudeSubmitBtn.textContent;
+          gratitudeSubmitBtn.textContent = 'Posting...';
 
-          const newEntry = {
-            id: 'note-' + Date.now(),
-            name,
-            message,
-            dateLabel: 'Just now',
-            seeded: false,
-          };
-
-          gratitudeEntries = [newEntry, ...gratitudeEntries];
-          saveGratitudeEntries(gratitudeEntries);
-          renderGratitudeBoard(newEntry.id);
-
-          nameInput.value = '';
-          msgInput.value = '';
-          HolidayAudio.chime();
-          showToast(`Added ${name}'s gratitude note to the board!`);
+          try {
+            lastCreatedNoteId = await window.TokarGratitudeAPI.addNote(name, message);
+            nameInput.value = '';
+            msgInput.value = '';
+            HolidayAudio.chime();
+            showToast(`Added ${name}'s gratitude note for everyone to see!`);
+          } catch {
+            gratitudeError.textContent = 'Could not save your note right now. Please try again.';
+          } finally {
+            gratitudeSubmitBtn.disabled = false;
+            gratitudeSubmitBtn.textContent = prevLabel;
+          }
         });
 
         renderGratitudeBoard();
+        syncFromBridge();
 
         /* ----------------------------------------------------------------------
            9. SECRET MINI-GAME: THE GREAT TOKAR TURKEY CHALLENGE (HTML5 CANVAS)
@@ -5045,5 +5160,6 @@
         });
       })();
     </script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
