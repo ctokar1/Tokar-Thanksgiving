@@ -1565,17 +1565,10 @@
           grid-template-columns: 1fr;
         }
         .site-footer {
-          padding: 2rem 1rem 5.25rem;
-        }
-        .corner-secret-btn {
-          right: 0.85rem;
-          bottom: 0.85rem;
-          padding: 0.5rem 0.85rem;
-          font-size: 0.8rem;
-          min-height: 42px;
+          padding: 2rem 1rem 2.75rem;
         }
         .toast-region {
-          bottom: 4.5rem;
+          bottom: 1.25rem;
           width: calc(100vw - 2rem);
           max-width: 400px;
         }
@@ -1844,7 +1837,13 @@
                   <h3 class="menu-host">Coleman &amp; Jennie Tokar</h3>
                   <span class="menu-role">Hosts &amp; Main Course</span>
                 </div>
-                <div class="menu-icon-wrap" aria-hidden="true">
+                <button
+                  type="button"
+                  id="egg-turkey-btn"
+                  class="menu-icon-wrap secret-svg-btn launch-game-btn"
+                  title="Psst... tap the turkey to enter the Tokar Kitchen mini-game!"
+                  aria-label="Tap the roasted turkey to launch The Great Tokar Turkey Challenge"
+                >
                   <!-- Custom Shaded Roasted Turkey SVG -->
                   <svg width="48" height="48" viewBox="0 0 64 64" fill="none">
                     <defs>
@@ -1871,30 +1870,13 @@
                     <circle cx="18.5" cy="47.5" r="2" fill="#6B1D2F" />
                     <path d="M44 47C47 45 50 45 52 47" stroke="#4A5D4E" stroke-width="2" stroke-linecap="round" />
                   </svg>
-                </div>
+                </button>
               </div>
               <ul class="menu-dishes">
                 <li><span class="dish-bullet" aria-hidden="true">·</span> Roasted Turkey</li>
                 <li><span class="dish-bullet" aria-hidden="true">·</span> Mac &amp; Cheese</li>
                 <li><span class="dish-bullet" aria-hidden="true">·</span> Carrots &amp; Brussels Sprouts</li>
               </ul>
-              <!-- Easter Egg #3: Secret Chef's Hat / Glowing Turkey Trigger -->
-              <button
-                type="button"
-                class="secret-chef-trigger launch-game-btn"
-                title="Psst... click to enter the Tokar Kitchen mini-game!"
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path
-                    d="M6 14C4.2 14 3 12.6 3 10.9C3 9.3 4.1 8 5.6 7.8C6.3 5.6 8.4 4 11 4C11.4 4 11.7 4 12 4.1C12.3 4 12.6 4 13 4C15.6 4 17.7 5.6 18.4 7.8C19.9 8 21 9.3 21 10.9C21 12.6 19.8 14 18 14V18C18 19.1 17.1 20 16 20H8C6.9 20 6 19.1 6 18V14Z"
-                    fill="#FFFDF9"
-                    stroke="#B08418"
-                    stroke-width="1.6"
-                  />
-                  <path d="M6 16H18" stroke="#C59B27" stroke-width="1.4" />
-                </svg>
-                <span>Secret Kitchen Challenge</span>
-              </button>
             </article>
 
             <!-- Card 2: Jackie & Brandon Yurik -->
@@ -2188,25 +2170,6 @@
         </div>
       </div>
     </footer>
-
-    <!-- Subtle Corner Button to Launch Secret Mini-Game Easily -->
-    <button
-      type="button"
-      id="corner-secret-btn"
-      class="corner-secret-btn launch-game-btn"
-      aria-label="Open Chef's Secret mini-game: The Great Tokar Turkey Challenge"
-    >
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path
-          d="M6 14C4.2 14 3 12.6 3 10.9C3 9.3 4.1 8 5.6 7.8C6.3 5.6 8.4 4 11 4C11.4 4 11.7 4 12 4.1C12.3 4 12.6 4 13 4C15.6 4 17.7 5.6 18.4 7.8C19.9 8 21 9.3 21 10.9C21 12.6 19.8 14 18 14V18C18 19.1 17.1 20 16 20H8C6.9 20 6 19.1 6 18V14Z"
-          fill="#FFFDF9"
-          stroke="#6B1D2F"
-          stroke-width="1.7"
-        />
-        <path d="M6 16H18" stroke="#C59B27" stroke-width="1.6" />
-      </svg>
-      <span>Chef’s Secret</span>
-    </button>
 
     <!-- Toast Region -->
     <div class="toast-region" aria-live="polite">
